@@ -66,8 +66,8 @@ nav{
 .nav-cta:hover{background:var(--gold);color:var(--charcoal)}
 
 /* mobile nav */
-.nav-mobile-menu{display:none;flex-direction:column;gap:0;position:absolute;top:100%;left:0;right:0;background:var(--warm);border-bottom:1px solid rgba(201,169,110,.2);box-shadow:0 8px 32px rgba(0,0,0,.1);z-index:300}
-.nav-mobile-menu.open{display:flex}
+.nav-mobile-menu{display:flex;flex-direction:column;gap:0;position:absolute;top:100%;left:0;right:0;background:var(--warm);border-bottom:1px solid rgba(201,169,110,.2);box-shadow:0 8px 32px rgba(0,0,0,.1);z-index:300;max-height:0;overflow:hidden;transition:max-height 0.28s ease}
+.nav-mobile-menu.open{max-height:320px}
 .nav-mobile-link{font-size:0.9rem;font-weight:400;color:var(--muted);padding:1rem 1.5rem;border-bottom:1px solid rgba(201,169,110,.1);border:none;background:none;font-family:'DM Sans',sans-serif;text-align:left;cursor:pointer;width:100%}
 .nav-mobile-link.active{color:var(--charcoal);font-weight:500;background:var(--gold-p)}
 .nav-hamburger{display:none;background:none;border:1px solid rgba(201,169,110,.3);border-radius:8px;padding:.45rem .55rem;cursor:pointer;flex-direction:column;gap:4px;flex-shrink:0}
@@ -567,14 +567,14 @@ footer p{font-size:.73rem;color:var(--muted)}
     <button class="nav-hamburger" onclick="toggleMenu('menu-home')" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
+    <div class="nav-mobile-menu" id="menu-home">
+      <button class="nav-mobile-link active" onclick="showPage('home');closeMenus()">For Providers</button>
+      <button class="nav-mobile-link" onclick="showPage('practices');closeMenus()">For Practices</button>
+      <button class="nav-mobile-link" onclick="showPage('educators');closeMenus()">For Educators</button>
+      <button class="nav-mobile-link" onclick="showPage('sponsors');closeMenus()">For Sponsors</button>
+      <button class="nav-mobile-link" style="color:var(--gold-d);font-weight:500;background:var(--gold-p)" onclick="showPage('home');closeMenus();setTimeout(()=>document.getElementById('waitlist').scrollIntoView({behavior:'smooth'}),100)">Reserve My Spot →</button>
+    </div>
   </nav>
-  <div class="nav-mobile-menu" id="menu-home">
-    <button class="nav-mobile-link active" onclick="showPage('home');closeMenus()">For Providers</button>
-    <button class="nav-mobile-link" onclick="showPage('practices');closeMenus()">For Practices</button>
-    <button class="nav-mobile-link" onclick="showPage('educators');closeMenus()">For Educators</button>
-    <button class="nav-mobile-link" onclick="showPage('sponsors');closeMenus()">For Sponsors</button>
-    <button class="nav-mobile-link" style="color:var(--gold-d);font-weight:500;background:var(--gold-p)" onclick="showPage('home');closeMenus();setTimeout(()=>document.getElementById('waitlist').scrollIntoView({behavior:'smooth'}),100)">Reserve My Spot →</button>
-  </div>
 
   <section class="home-hero">
     <div class="hero-left">
@@ -676,14 +676,14 @@ footer p{font-size:.73rem;color:var(--muted)}
     </div>
     <button class="nav-cta" onclick="document.getElementById('practice-form').scrollIntoView({behavior:'smooth'})">Request Access</button>
     <button class="nav-hamburger" onclick="toggleMenu('menu-practices')" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="nav-mobile-menu" id="menu-practices">
+      <button class="nav-mobile-link" onclick="showPage('home');closeMenus()">For Providers</button>
+      <button class="nav-mobile-link active" onclick="showPage('practices');closeMenus()">For Practices</button>
+      <button class="nav-mobile-link" onclick="showPage('educators');closeMenus()">For Educators</button>
+      <button class="nav-mobile-link" onclick="showPage('sponsors');closeMenus()">For Sponsors</button>
+      <button class="nav-mobile-link" style="color:var(--gold-d);font-weight:500;background:var(--gold-p)" onclick="closeMenus();document.getElementById('practice-form').scrollIntoView({behavior:'smooth'})">Request Access →</button>
+    </div>
   </nav>
-  <div class="nav-mobile-menu" id="menu-practices">
-    <button class="nav-mobile-link" onclick="showPage('home');closeMenus()">For Providers</button>
-    <button class="nav-mobile-link active" onclick="showPage('practices');closeMenus()">For Practices</button>
-    <button class="nav-mobile-link" onclick="showPage('educators');closeMenus()">For Educators</button>
-    <button class="nav-mobile-link" onclick="showPage('sponsors');closeMenus()">For Sponsors</button>
-    <button class="nav-mobile-link" style="color:var(--gold-d);font-weight:500;background:var(--gold-p)" onclick="closeMenus();document.getElementById('practice-form').scrollIntoView({behavior:'smooth'})">Request Access →</button>
-  </div>
 
   <div class="practices-hero">
     <div class="phl">
@@ -782,14 +782,14 @@ footer p{font-size:.73rem;color:var(--muted)}
     </div>
     <button class="nav-cta" style="background:var(--gold);color:var(--charcoal)" onclick="document.getElementById('edu-form').scrollIntoView({behavior:'smooth'})">Apply to Teach</button>
     <button class="nav-hamburger" onclick="toggleMenu('menu-educators')" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="nav-mobile-menu" id="menu-educators">
+      <button class="nav-mobile-link" onclick="showPage('home');closeMenus()">For Providers</button>
+      <button class="nav-mobile-link" onclick="showPage('practices');closeMenus()">For Practices</button>
+      <button class="nav-mobile-link active" onclick="showPage('educators');closeMenus()">For Educators</button>
+      <button class="nav-mobile-link" onclick="showPage('sponsors');closeMenus()">For Sponsors</button>
+      <button class="nav-mobile-link" style="color:var(--gold-d);font-weight:500;background:var(--gold-p)" onclick="closeMenus();document.getElementById('edu-form').scrollIntoView({behavior:'smooth'})">Apply to Teach →</button>
+    </div>
   </nav>
-  <div class="nav-mobile-menu" id="menu-educators">
-    <button class="nav-mobile-link" onclick="showPage('home');closeMenus()">For Providers</button>
-    <button class="nav-mobile-link" onclick="showPage('practices');closeMenus()">For Practices</button>
-    <button class="nav-mobile-link active" onclick="showPage('educators');closeMenus()">For Educators</button>
-    <button class="nav-mobile-link" onclick="showPage('sponsors');closeMenus()">For Sponsors</button>
-    <button class="nav-mobile-link" style="color:var(--gold-d);font-weight:500;background:var(--gold-p)" onclick="closeMenus();document.getElementById('edu-form').scrollIntoView({behavior:'smooth'})">Apply to Teach →</button>
-  </div>
 
   <div class="edu-hero">
     <div>
@@ -902,14 +902,14 @@ footer p{font-size:.73rem;color:var(--muted)}
     </div>
     <button class="nav-cta" onclick="document.getElementById('sponsor-form').scrollIntoView({behavior:'smooth'})">Partner With Us</button>
     <button class="nav-hamburger" onclick="toggleMenu('menu-sponsors')" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="nav-mobile-menu" id="menu-sponsors">
+      <button class="nav-mobile-link" onclick="showPage('home');closeMenus()">For Providers</button>
+      <button class="nav-mobile-link" onclick="showPage('practices');closeMenus()">For Practices</button>
+      <button class="nav-mobile-link" onclick="showPage('educators');closeMenus()">For Educators</button>
+      <button class="nav-mobile-link active" onclick="showPage('sponsors');closeMenus()">For Sponsors</button>
+      <button class="nav-mobile-link" style="color:var(--gold-d);font-weight:500;background:var(--gold-p)" onclick="closeMenus();document.getElementById('sponsor-form').scrollIntoView({behavior:'smooth'})">Partner With Us →</button>
+    </div>
   </nav>
-  <div class="nav-mobile-menu" id="menu-sponsors">
-    <button class="nav-mobile-link" onclick="showPage('home');closeMenus()">For Providers</button>
-    <button class="nav-mobile-link" onclick="showPage('practices');closeMenus()">For Practices</button>
-    <button class="nav-mobile-link" onclick="showPage('educators');closeMenus()">For Educators</button>
-    <button class="nav-mobile-link active" onclick="showPage('sponsors');closeMenus()">For Sponsors</button>
-    <button class="nav-mobile-link" style="color:var(--gold-d);font-weight:500;background:var(--gold-p)" onclick="closeMenus();document.getElementById('sponsor-form').scrollIntoView({behavior:'smooth'})">Partner With Us →</button>
-  </div>
 
   <div class="sponsors-hero">
     <div class="ink-left">
