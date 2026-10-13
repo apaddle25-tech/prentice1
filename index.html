@@ -53,6 +53,10 @@ p{margin:0}
 .btn.ghost{background:transparent;color:var(--ink)}
 .btn.ghost:hover{background:var(--paper-2)}
 .btn.gold{background:var(--gold);border-color:var(--gold);color:#14110F}
+.links .btn.ghost{padding:8px 16px;font-size:14px}
+/* .btn sets display:inline-flex, which beats the browser's own rule for [hidden] and showed Dashboard to a
+   signed-out visitor. Class+attribute outranks the bare class, so this needs no !important. */
+.auth[hidden]{display:none}
 .btn[disabled]{opacity:.5;cursor:not-allowed}
 .menu{display:none;background:none;border:1px solid var(--line);padding:8px 12px;border-radius:2px;cursor:pointer}
 @media (max-width:820px){
@@ -352,6 +356,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
       <a href="#/applicants" data-nav="applicants">For applicants</a>
       <a href="#/sponsors" data-nav="sponsors">For sponsors</a>
       <a href="#/practices" data-nav="practices">For practices</a>
+      <!--
+        The learning platform lives on app.prentice1.com. Which of these three is shown is decided at load by asking
+        the app whether this browser holds a session; see the script at the end of the file. All three start hidden
+        so a visitor never sees the wrong one flash before the answer arrives.
+      -->
+      <a class="auth" id="authLogIn" href="https://app.prentice1.com/login" hidden>Log in</a>
+      <a class="btn ghost auth" id="authDashboard" href="https://app.prentice1.com/dashboard" hidden>Dashboard</a>
+      <a class="auth" id="authLogOut" href="https://app.prentice1.com/logout" hidden>Log out</a>
       <a class="btn" href="#/checkout/tuition" style="color:var(--paper)">Apply now</a>
     </div>
   </div>
@@ -1147,6 +1159,43 @@ document.getElementById('menuBtn').addEventListener('click',e=>{
 });
 window.addEventListener('hashchange', render);
 render();
+</script>
+
+<script>
+/*
+  Which of Log in / Dashboard / Log out the nav shows.
+
+  prentice1.com is static and on a different origin from the app, so it cannot read the session cookie itself. It
+  asks the app instead: GET app.prentice1.com/api/session-state returns one boolean and nothing else, and the
+  session cookie is scoped to .prentice1.com so the browser sends it. SIGNED OUT IS THE DEFAULT — if the app is
+  unreachable, slow, or answers with anything unexpected, "Log in" is the honest thing to show, and it still works,
+  because the app sends anyone without a session to its own sign-in page.
+*/
+(function () {
+  var APP = "https://app.prentice1.com";
+  var logIn = document.getElementById("authLogIn");
+  var dash = document.getElementById("authDashboard");
+  var out = document.getElementById("authLogOut");
+  if (!logIn || !dash || !out) return;
+
+  function show(signedIn) {
+    logIn.hidden = !!signedIn;
+    dash.hidden = !signedIn;
+    out.hidden = !signedIn;
+  }
+  show(false);
+
+  function check() {
+    fetch(APP + "/api/session-state", { credentials: "include", cache: "no-store" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (s) { show(!!(s && s.signed_in === true)); })
+      .catch(function () { show(false); });
+  }
+  check();
+  // The back button can restore this page from the bfcache with its old nav — after signing out in the app that
+  // would still read "Dashboard". Ask again whenever the page is restored.
+  window.addEventListener("pageshow", function (e) { if (e.persisted) check(); });
+})();
 </script>
 </body>
 </html>
