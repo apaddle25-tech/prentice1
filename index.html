@@ -246,7 +246,7 @@ tfoot td{border-bottom:0;padding-top:20px}
 .rv{opacity:0;transform:translateY(36px);transition:opacity 1s cubic-bezier(.16,.84,.24,1) var(--d,0s),transform 1s cubic-bezier(.16,.84,.24,1) var(--d,0s)}
 .rv.in{opacity:1;transform:none}
 .clip{clip-path:inset(0 0 100% 0);transform:scale(1.1);transition:clip-path 1.5s cubic-bezier(.7,0,.2,1),transform 1.8s cubic-bezier(.16,.84,.24,1)}
-.clip.in{clip-path:inset(0 0 0 0);transform:scale(1)}
+.clip.in,.in>.clip{clip-path:inset(0 0 0 0);transform:scale(1)}
 .track::before{transform:scaleX(0);transform-origin:0 50%;transition:transform 1.8s cubic-bezier(.65,0,.2,1) .2s}
 .track.in::before{transform:scaleX(1)}
 .wk .dot{transition:transform .5s cubic-bezier(.16,.84,.24,1),background .3s,color .3s,border-color .3s}
@@ -294,9 +294,9 @@ tfoot td{border-bottom:0;padding-top:20px}
 .hands>.handrow,.hands>.handrow+.handrow{padding:40px 0;border-left:0;border-top:0}
 .cadfig{margin:0}
 .cadfig svg{display:block;width:100%;max-width:none;height:auto;margin:0}
-.cadaver .lead{stroke-dasharray:260;stroke-dashoffset:260}
+.cadaver .ldr{stroke-dasharray:260;stroke-dashoffset:260}
 .cadaver .ann text,.cadaver .ann circle{opacity:0}
-.in .cadaver .lead,.cadaver.in .lead{animation:draw 1.2s cubic-bezier(.65,0,.2,1) forwards}
+.in .cadaver .ldr,.cadaver.in .ldr{animation:draw 1.2s cubic-bezier(.65,0,.2,1) forwards}
 .in .cadaver .ann text,.in .cadaver .ann circle{animation:fadein .6s ease forwards}
 .cadaver .a1 *{animation-delay:.4s!important}.cadaver .a2 *{animation-delay:.9s!important}.cadaver .a3 *{animation-delay:1.4s!important}
 .in .cadaver .ann circle{animation:fadein .6s ease forwards,pulse 2.4s ease-in-out 2s infinite}
@@ -306,7 +306,7 @@ tfoot td{border-bottom:0;padding-top:20px}
 @keyframes fadein{to{opacity:1}}
 @keyframes pulse{0%,100%{r:4}50%{r:6.5}}
 @media (max-width:820px){.handrow,.handrow.alt{grid-template-columns:1fr;gap:24px}}
-@media (prefers-reduced-motion:reduce){.cadaver .lead,.cadaver .vessel{stroke-dashoffset:0}.cadaver .ann text,.cadaver .ann circle,.cadaver .cone{opacity:1}}
+@media (prefers-reduced-motion:reduce){.cadaver .ldr,.cadaver .vessel{stroke-dashoffset:0}.cadaver .ann text,.cadaver .ann circle,.cadaver .cone{opacity:1}}
 .aday{background:#14110F;color:#D9CFC0;padding:104px 0;border-top:1px solid #3A3129}
 .aday h2{color:#FCF8F2;font-size:clamp(56px,8vw,112px);line-height:.95}
 .aday h3{color:#FCF8F2}
@@ -502,9 +502,9 @@ const CADAVER_SVG = `<svg class="cadaver" viewBox="70 -84 600 368" role="img" ar
   <path d="M404 250 C404 190 410 152 432 138 C462 122 500 114 540 114 C590 114 630 126 680 124 L680 250 Z" fill="url(#sheet)" stroke="#CDBFAA" stroke-width="1.2"/>
   <path d="M440 150 C480 160 530 156 580 142 M450 200 C500 206 570 198 660 180" stroke="#D3C5AF" stroke-width="1.1" fill="none"/>
   <g font-family="DM Mono, monospace" font-size="13" fill="#7A5E28">
-    <g class="ann a1"><path class="lead" d="M276 84 L380 -26 H462" stroke="#C9A96E" fill="none"/><circle cx="276" cy="84" r="5" fill="#C9A96E"/><text x="470" y="-22">REAL MUSCLE, REAL DEPTH</text></g>
-    <g class="ann a2"><path class="lead" d="M338 124 L420 8 H462" stroke="#C9A96E" fill="none"/><circle cx="338" cy="124" r="5" fill="#B5222B"/><text x="470" y="12">REAL VESSELS</text></g>
-    <g class="ann a3"><path class="lead" d="M262 150 L350 -60 H462" stroke="#C9A96E" fill="none"/><circle cx="262" cy="150" r="5" fill="#C9A96E"/><text x="470" y="-56">REAL NERVES</text></g>
+    <g class="ann a1"><path class="ldr" d="M276 84 L380 -26 H462" stroke="#C9A96E" fill="none"/><circle cx="276" cy="84" r="5" fill="#C9A96E"/><text x="470" y="-22">REAL MUSCLE, REAL DEPTH</text></g>
+    <g class="ann a2"><path class="ldr" d="M338 124 L420 8 H462" stroke="#C9A96E" fill="none"/><circle cx="338" cy="124" r="5" fill="#B5222B"/><text x="470" y="12">REAL VESSELS</text></g>
+    <g class="ann a3"><path class="ldr" d="M262 150 L350 -60 H462" stroke="#C9A96E" fill="none"/><circle cx="262" cy="150" r="5" fill="#C9A96E"/><text x="470" y="-56">REAL NERVES</text></g>
   </g>
 </svg>`;
 const LAYERS_SVG = (cap="Know exactly which layer you're in") => `<svg viewBox="0 0 380 150" role="img" aria-label="Illustration of facial tissue layers from skin down to bone, with an artery and vein">
@@ -1138,7 +1138,7 @@ function setupMotion(){
       el.classList.add('rv'); el.style.setProperty('--d',(Math.min(i++,8)*0.08)+'s'); io.observe(el);
     });
   });
-  app.querySelectorAll('.portrait,.shot').forEach(el=>{ el.classList.add('clip'); io.observe(el); });
+  app.querySelectorAll('.portrait,.shot').forEach(el=>{ el.classList.add('clip'); io.observe(el.parentElement); });
   app.querySelectorAll('.track,.agenda').forEach(el=>io.observe(el));
 }
 
