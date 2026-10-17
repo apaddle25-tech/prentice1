@@ -1,0 +1,244 @@
+/* ============================================================================
+   Prentice1 — shared stylesheet
+   Values come from Brand Book Rev 2.0 (Oct 2026). Where the brand book, the
+   redesign README and the .dc.html reference files disagree, the brand book
+   wins — that is its own closing rule.
+   ========================================================================= */
+
+:root {
+  /* --- Colour (brand book §04) ------------------------------------------ */
+  --charcoal:      #14110F;   /* header, dark sections, heroes, footer */
+  --stage:         #1C1815;   /* behind videos while they load */
+  --page:          #F1E9DE;   /* body ground; the live-week section */
+  --cream:         #FCF8F2;   /* cards; light sections */
+  --gold-wash:     #FBF2E0;   /* audience tile fill, hover tint */
+  --rule:          #E4D8C4;   /* borders, dividers */
+
+  --ink:           #221A14;   /* primary text on light */
+  --ink-2:         #6C5C4B;   /* body on light — the LIGHTEST ink allowed on cream */
+  --ink-muted:     #9A8975;   /* footer column labels */
+  --on-dark:       #ECE4D6;   /* primary text on charcoal */
+  --on-dark-dim:   #C2B6A4;   /* secondary text on charcoal */
+
+  --gold:          #C9A96E;   /* the accent: CTAs, rules, focus rings */
+  --gold-top:      #D4B67E;   /* top stop of the CTA gradient */
+  --gold-light:    #E8C07A;   /* gold text on dark, eyebrows on dark */
+  --highlight:     #F2D49C;   /* gold text on the CTA-section secondary button */
+  --gold-deep:     #7A5E28;   /* ALL gold text on cream — never --gold (2.1:1) */
+  --link-hover:    #5E4720;
+  --divider-dark:  #3A3129;   /* dividers on charcoal */
+
+  /* States are never decoration and never appear without a word (§04).
+     The site uses only the error tone, for form validation on /apply.
+     TODO: confirm the full state ramp against the brand book's colour section
+     before any second state is introduced. */
+  --state-err:     #A8503E;
+
+  /* --- Type (brand book §05) -------------------------------------------- */
+  --display: 'Newsreader', Georgia, serif;        /* headlines, section titles */
+  --numeral: 'Gilda Display', Georgia, serif;     /* figures 26px+ ONLY, never words */
+  --sans:    'DM Sans', system-ui, sans-serif;    /* everything read or pressed */
+  --mono:    'DM Mono', monospace;                /* eyebrows, labels, IDs */
+
+  /* --- Space (brand book §09) ------------------------------------------- */
+  --s-1: 4px;   --s-2: 8px;   --s-3: 10px;  --s-4: 12px;
+  --s-5: 14px;  --s-6: 16px;  --s-7: 20px;  --s-8: 24px;
+  --s-9: 32px;  --s-10: 40px; --s-11: 56px; --s-12: 72px;
+
+  --gutter:  clamp(20px, 5vw, 64px);
+  --section: clamp(64px, 9vw, 112px);
+  --measure: 1180px;   /* content max-width */
+  --measure-faq: 880px;
+  --measure-tile: 960px;
+
+  /* --- Form and depth (brand book §06) ---------------------------------- */
+  --r-control: 3px;    /* buttons, inputs */
+  --r-card:    8px;    /* cards, image frames, dark CTA panels */
+  --r-frame:   10px;   /* the screen-recording frame */
+  --r-pill:    100px;  /* pills, chips, audience CTAs */
+
+  --shadow-card:  0 1px 2px rgba(34,26,20,0.03), 0 8px 24px -16px rgba(34,26,20,0.14);
+  --shadow-gold:  0 1px 2px rgba(34,26,20,0.04), 0 12px 28px -18px rgba(122,94,40,0.35);
+  --shadow-dark:  inset 0 1px 0 rgba(255,255,255,0.05), 0 2px 4px rgba(34,26,20,0.12), 0 28px 60px -28px rgba(20,17,15,0.7);
+  --shadow-cta:   inset 0 1px 0 rgba(255,255,255,0.4), 0 6px 16px -6px rgba(201,169,110,0.7);
+  --shadow-head:  0 1px 0 rgba(236,228,214,0.07), 0 14px 34px -16px rgba(20,17,15,0.7);
+  --shadow-media: 0 30px 60px -30px rgba(20,17,15,0.45);
+
+  /* --- Motion (brand book §07) ------------------------------------------
+     One curve. Nothing over 600ms. Nothing bounces. Nothing slides in from an
+     edge. The sign-in transition is the single exception and lives in the
+     platform, not here. */
+  --ease: cubic-bezier(0.22, 0.7, 0.2, 1);
+  --t-fast: 240ms;
+  --t-base: 380ms;
+  --t-slow: 560ms;
+}
+
+/* The grounds are fixed per section (§14) — there is deliberately no
+   prefers-color-scheme handling. The previous site interpolated the whole
+   palette on scroll; Rev 2.0 replaced that with solid, per-section grounds. */
+
+/* ============================================================================
+   Base
+   ========================================================================= */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+html, body { margin: 0; padding: 0; background: var(--page); }
+
+body {
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  font-variant-numeric: lining-nums;   /* numbers sit on the baseline (§05) */
+}
+
+a { color: var(--gold-deep); text-decoration: none; }
+a:hover { color: var(--link-hover); text-decoration: underline; }
+
+img, video { max-width: 100%; display: block; }
+
+button, input, select, textarea { font: inherit; color: inherit; }
+
+/* §13: no control without a visible focus ring. */
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+::selection { background: rgba(201, 169, 110, 0.35); }
+
+h1, h2, h3, h4 { margin: 0; font-family: var(--display); font-weight: 300; color: var(--ink); }
+
+/* §05: display headings never break to one word per line. */
+h1, h2 { text-wrap: pretty; }
+
+p { margin: 0; }
+
+/* ============================================================================
+   Shared primitives
+   ========================================================================= */
+
+.wrap { max-width: var(--measure); margin: 0 auto; padding-inline: var(--gutter); }
+
+/* Anchor targets clear the sticky header. */
+[id] { scroll-margin-top: 64px; }
+
+/* §05 floor: 10.5px is the smallest text anywhere. */
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+}
+.eyebrow--on-dark { color: var(--gold-light); }
+
+/* Skip link: off-screen until focused, then a gold pill top-left. */
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 8px;
+  z-index: 100;
+  background: var(--gold);
+  color: var(--charcoal);
+  padding: 8px 14px;
+  border-radius: var(--r-pill);
+}
+.skip:focus { left: 8px; text-decoration: none; }
+
+/* --- Buttons -------------------------------------------------------------
+   §07: hover lifts 1px on the website, and every button presses to 0.985. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  padding: 12px 20px;
+  border: 1px solid transparent;
+  border-radius: var(--r-control);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform var(--t-fast) var(--ease),
+              background-color var(--t-fast) var(--ease),
+              border-color var(--t-fast) var(--ease),
+              color var(--t-fast) var(--ease);
+}
+.btn:hover { text-decoration: none; transform: translateY(-1px); }
+.btn:active { transform: scale(0.985); }
+
+.btn--gold {
+  background: linear-gradient(180deg, var(--gold-top) 0%, var(--gold) 100%);
+  color: var(--charcoal);
+  box-shadow: var(--shadow-cta);
+  white-space: nowrap;
+}
+.btn--gold:hover { color: var(--charcoal); }
+
+.btn--outline {
+  background: transparent;
+  border-color: var(--gold);
+  color: var(--gold-light);
+}
+.btn--outline:hover { color: var(--highlight); }
+
+/* Solid charcoal on a video ground — must stay readable over moving footage. */
+.btn--dark {
+  background: var(--charcoal);
+  border-color: var(--gold);
+  color: var(--highlight);
+}
+.btn--dark:hover { color: var(--highlight); }
+
+.btn--ink { background: var(--charcoal); color: var(--cream); }
+.btn--ink:hover { color: var(--cream); }
+
+/* --- Motion utilities ----------------------------------------------------
+   §13: no content depends on motion. Everything below renders visible by
+   default; site.js adds .motion-ready to <html> only once it has confirmed
+   IntersectionObserver support, and only then do the hidden states apply.
+   If the script never runs, the page simply reads. */
+
+.motion-ready .rv {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity var(--t-base) var(--ease) var(--rv-delay, 0s),
+              transform var(--t-base) var(--ease) var(--rv-delay, 0s);
+}
+.motion-ready .rv.is-in { opacity: 1; transform: none; }
+
+.motion-ready .unveil {
+  opacity: 0;
+  transform: scale(1.01);
+  transition: opacity var(--t-slow) var(--ease), transform var(--t-slow) var(--ease);
+}
+.motion-ready .unveil.is-in { opacity: 1; transform: none; }
+
+/* Scroll progress: a mapping of position, not an animation, so it has no
+   duration to cap. */
+.progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  z-index: 60;
+  pointer-events: none;
+}
+
+/* §07: reduced motion is mandatory — every animation collapses to 1ms. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+  .motion-ready .rv,
+  .motion-ready .unveil { opacity: 1; transform: none; }
+  .progress { display: none; }
+}
