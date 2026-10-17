@@ -842,3 +842,58 @@ p { margin: 0; }
 .footer__row { display: flex; flex-wrap: wrap; gap: var(--s-4) 28px; align-items: center; font-size: 14px; }
 .footer__row a { color: var(--on-dark); }
 .footer__row a:hover { color: var(--gold-light); }
+
+/* ============================================================================
+   /apply — single column on cream, no payment step (brand book §12)
+   ========================================================================= */
+
+.apply { background: var(--cream); min-height: 70vh; padding: clamp(40px, 6vw, 72px) 0 clamp(64px, 9vw, 112px); }
+.apply__wrap { max-width: 640px; margin: 0 auto; padding-inline: var(--gutter); display: flex; flex-direction: column; gap: var(--s-9); }
+.apply__head { display: flex; flex-direction: column; gap: var(--s-5); }
+.apply__head h1 { font-size: clamp(40px, 5.4vw, 64px); line-height: 1; letter-spacing: -0.02em; }
+
+.apply__facts { margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); gap: var(--s-6); border-top: 1px solid var(--charcoal); padding-top: var(--s-7); }
+.apply__facts dt { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; color: var(--gold-deep); }
+.apply__facts dd { margin: 6px 0 0; font-size: 15px; color: var(--ink); }
+
+.apply__form { display: flex; flex-direction: column; gap: var(--s-7); }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field label { font-size: 14px; font-weight: 500; color: var(--ink); }
+.field input {
+  background: #FFFFFF; border: 1px solid var(--rule);
+  padding: var(--s-4) var(--s-5); border-radius: var(--r-control); width: 100%;
+  transition: border-color var(--t-fast) var(--ease);
+}
+.field input:focus { border-color: var(--charcoal); }
+.field input[aria-invalid="true"] { border-color: var(--state-err); }
+.field__hint { font-size: 13px; color: var(--ink-2); }
+/* The message carries the words; the colour only reinforces them (§13). */
+.field__msg { font-size: 13px; color: var(--state-err); }
+.field__msg:empty { display: none; }
+
+/* Honeypot: out of sight for people, still in the DOM for bots. */
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.apply__submit { align-self: flex-start; }
+.apply__micro { font-size: 13.5px; color: var(--ink-2); }
+
+.apply__status { padding: var(--s-6) 18px; border-radius: var(--r-control); font-size: 15px; line-height: 1.55; }
+.apply__status--ok   { background: var(--gold-wash); border: 1px solid rgba(201, 169, 110, 0.55); color: var(--ink); }
+.apply__status--warn { background: #FFFFFF; border: 1px solid var(--state-err); color: var(--ink); }
+
+.apply__next { display: flex; flex-direction: column; gap: var(--s-6); border-top: 1px solid var(--rule); padding-top: var(--s-9); }
+.apply__steps { list-style: none; margin: 0; padding: 0; }
+.apply__steps li { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: var(--s-4); padding: var(--s-5) 0; border-bottom: 1px solid var(--rule); font-size: 15px; line-height: 1.55; color: var(--ink-2); }
+.apply__steps b { font-weight: 500; color: var(--ink); }
+.apply__n { font-family: var(--numeral); font-size: 22px; line-height: 1.2; color: var(--gold-deep); }
+.apply__legal { font-size: 13px; line-height: 1.6; color: var(--ink-2); }
+
+/* ============================================================================
+   Policy stubs and 404
+   ========================================================================= */
+
+.plain { background: var(--cream); min-height: 70vh; padding: clamp(56px, 9vw, 112px) 0; }
+.plain__wrap { max-width: 680px; margin: 0 auto; padding-inline: var(--gutter); display: flex; flex-direction: column; gap: var(--s-7); }
+.plain h1 { font-size: clamp(38px, 5vw, 58px); line-height: 1.02; }
+.plain p { font-size: 16px; line-height: 1.65; color: var(--ink-2); }
+.plain__actions { display: flex; gap: var(--s-4); flex-wrap: wrap; margin-top: var(--s-2); }
