@@ -121,29 +121,44 @@
     // back into view must not quietly start it again.
     var userPaused = reduced.matches;
 
-    function playable(v) { return !userPaused && !reduced.matches; }
+    /* Visibility is held as state and playback is derived from it, rather than
+       play/pause being fired straight from the observer callback. Two reasons,
+       both found in testing:
+
+       - The first IntersectionObserver callback can report isIntersecting
+         false while layout is still settling. Pausing directly from that
+         callback stops the hero that the autoplay attribute had just started,
+         and nothing ever starts it again.
+       - At DOMContentLoaded a video may still be at readyState 0. play() then
+         can reject, and a one-shot attempt leaves it paused for good.
+
+       sync() is idempotent, so it is safe to call from the observer, from
+       canplay, from the pause pill and from a reduced-motion change. */
+    var visible = new WeakMap();
+
+    function sync() {
+      videos.forEach(function (v) {
+        var shouldPlay = !userPaused && !reduced.matches && visible.get(v) !== false;
+        if (shouldPlay && v.paused) {
+          var p = v.play();
+          if (p && p.catch) p.catch(function () {});   // power saving, etc.
+        } else if (!shouldPlay && !v.paused) {
+          v.pause();
+        }
+      });
+    }
 
     if (canObserve) {
       var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          var v = e.target;
-          if (e.isIntersecting && playable(v)) {
-            // A rejected play() is normal (power saving, no user gesture on
-            // some platforms) and must not throw into the console.
-            var p = v.play();
-            if (p && p.catch) p.catch(function () {});
-          } else {
-            v.pause();
-          }
-        });
+        entries.forEach(function (e) { visible.set(e.target, e.isIntersecting); });
+        sync();
       }, { threshold: 0.15 });
       videos.forEach(function (v) { io.observe(v); });
-    } else if (!reduced.matches) {
-      videos.forEach(function (v) {
-        var p = v.play();
-        if (p && p.catch) p.catch(function () {});
-      });
     }
+
+    // A video that was not ready on the first attempt gets another one.
+    videos.forEach(function (v) { v.addEventListener("canplay", sync); });
+    sync();
 
     /* WCAG 2.2.2 — a pause control for moving content. Each pill controls
        every video on the page, not just its own section. */
@@ -160,14 +175,7 @@
     pills.forEach(function (btn) {
       btn.addEventListener("click", function () {
         userPaused = !userPaused;
-        videos.forEach(function (v) {
-          if (userPaused) {
-            v.pause();
-          } else {
-            var p = v.play();
-            if (p && p.catch) p.catch(function () {});
-          }
-        });
+        sync();
         render();
       });
     });
@@ -175,9 +183,8 @@
 
     // Honour a mid-session change to the OS motion setting.
     reduced.addEventListener("change", function (e) {
-      if (!e.matches) return;
-      userPaused = true;
-      videos.forEach(function (v) { v.pause(); });
+      if (e.matches) userPaused = true;
+      sync();
       render();
     });
   }
@@ -200,12 +207,59 @@
     function step() { return cards[0].getBoundingClientRect().width + GAP; }
     function index() { return Math.round(track.scrollLeft / step()); }
 
-    function goTo(i) {
+    /* The track is scrolled by a rAF tween rather than
+       scrollTo({behavior:'smooth'}), for two reasons.
+
+       Correctness: native smooth scrolling on this container was measured not
+       to move it at all — scrollLeft stayed at 0 with snap set to mandatory,
+       proximity and none alike, while behavior:'auto' worked every time.
+       Assigning scrollLeft per frame avoids that path entirely.
+
+       Brand: §07 puts every motion on cubic-bezier(0.22,0.7,0.2,1) under
+       600ms. Native smooth scroll has its own duration and curve and cannot
+       be told otherwise, so it could not have satisfied the rule regardless. */
+    function bezier(x) {
+      // cubic-bezier(0.22, 0.7, 0.2, 1) solved for y at progress x.
+      var x1 = 0.22, y1 = 0.7, x2 = 0.2, y2 = 1;
+      function cx(t) { return 3 * (1 - t) * (1 - t) * t * x1 + 3 * (1 - t) * t * t * x2 + t * t * t; }
+      function cy(t) { return 3 * (1 - t) * (1 - t) * t * y1 + 3 * (1 - t) * t * t * y2 + t * t * t; }
+      var lo = 0, hi = 1, t = x;
+      for (var i = 0; i < 20; i++) {         // bisection: plenty for 420ms
+        if (cx(t) < x) lo = t; else hi = t;
+        t = (lo + hi) / 2;
+      }
+      return cy(t);
+    }
+
+    var tween = null;
+    function scrollTrackTo(left) {
+      if (tween) cancelAnimationFrame(tween);
+      var from = track.scrollLeft;
+      var delta = left - from;
+      if (reduced.matches || !delta) { track.scrollLeft = left; return; }
+
+      var t0 = performance.now(), dur = 420;
+      (function frame(now) {
+        var p = Math.min(1, (now - t0) / dur);
+        track.scrollLeft = from + delta * bezier(p);
+        if (p < 1) tween = requestAnimationFrame(frame); else tween = null;
+      })(t0);
+    }
+
+    /* `wrap` is set by the → button and the auto-advance, not by the dots.
+
+       The last card cannot usually be scrolled to its own offset: several
+       cards fit at once, so scrollLeft maxes out at scrollWidth - clientWidth
+       and the final index is unreachable. Without the atEnd test, advancing
+       from the last reachable position asks for an offset the browser clamps,
+       the track does not move, and the carousel silently stops cycling. */
+    function goTo(i, wrap) {
       var last = cards.length - 1;
-      var target = i > last ? 0 : (i < 0 ? last : i);
+      var atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+      var target = (wrap && (i > last || atEnd)) ? 0 : Math.max(0, Math.min(last, i));
       // scrollIntoView would also scroll the page vertically to reach the
-      // track; scrollTo moves only this container.
-      track.scrollTo({ left: target * step(), behavior: reduced.matches ? "auto" : "smooth" });
+      // track; this moves only this container.
+      scrollTrackTo(target * step());
     }
 
     function paint() {
@@ -223,7 +277,7 @@
     }, { passive: true });
 
     if (prev) prev.addEventListener("click", function () { goTo(index() - 1); });
-    if (next) next.addEventListener("click", function () { goTo(index() + 1); });
+    if (next) next.addEventListener("click", function () { goTo(index() + 1, true); });
     dots.forEach(function (d, n) {
       d.addEventListener("click", function () { goTo(n); });
     });
@@ -235,7 +289,7 @@
     if (reduced.matches) return;
 
     var timer = null;
-    function start() { if (!timer) timer = setInterval(function () { goTo(index() + 1); }, 4000); }
+    function start() { if (!timer) timer = setInterval(function () { goTo(index() + 1, true); }, 4000); }
     function stop()  { clearInterval(timer); timer = null; }
 
     root.addEventListener("mouseenter", stop);
