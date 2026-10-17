@@ -348,12 +348,16 @@
     var logIn = document.getElementById("authLogIn");
     var dash  = document.getElementById("authDashboard");
     var out   = document.getElementById("authLogOut");
+    var rule  = document.getElementById("authDivider");
     if (!logIn || !dash || !out) return;
 
     function show(signedIn) {
       logIn.hidden = !!signedIn;
       dash.hidden = !signedIn;
       out.hidden = !signedIn;
+      // Exactly one of the three is now visible, so the divider has something
+      // to separate. It stays hidden if this never runs.
+      if (rule) rule.hidden = false;
     }
     show(false);
 

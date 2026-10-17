@@ -98,6 +98,10 @@
       <span class="nav__divider" aria-hidden="true"></span>
       <a class="nav__link nav__link--dim" href="/practices/">For practices</a>
       <a class="nav__link nav__link--dim" href="/sponsors/">For sponsors</a>
+      <!-- Hidden with the auth links it separates: exactly one of them is shown once the
+           session answer arrives, but if the script never runs all three stay hidden, and
+           an orphaned divider sitting against the CTA would be the only thing it marked. -->
+      <span class="nav__divider" id="authDivider" aria-hidden="true" hidden></span>
       <!-- Which of these three shows is decided at load by asking the app whether this
            browser holds a session; see initAuthNav in site.js. All three start hidden so
            a visitor never sees the wrong one flash before the answer arrives. -->
