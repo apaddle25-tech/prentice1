@@ -1,13 +1,21 @@
 /* ============================================================================
    /apply — the Cohort 1 application starter.
 
-   This page collects a name and an email and nothing else. That is deliberate:
-   licence, state and experience are classified fields under the platform's
-   admissions contract (packages/contracts/src/admissions-fields.ts), each with
-   a data class, a retention clock and an employer-visibility flag, and they
-   belong behind the endpoint that honours those policies rather than in a
-   static page. Name and email are the C1 fields, so they can be taken here and
-   the rest follows by email.
+   Everything needed to qualify and contact an applicant is taken in one
+   sitting — there is no second form to wait for by email, because the gap
+   between the two is where applicants are lost.
+
+   The fields stop where the data class does. Name, email, licence type, state,
+   experience and goals are C1 in the admissions contract
+   (packages/contracts/src/admissions-fields.ts): employer-visible already, and
+   retained to P+7. Mobile is C2. Nothing here touches what the contract guards
+   — no licence NUMBER (B-06, C4, "employers verify via the Readiness Standard
+   endpoint, not a number we hand over"), no date of birth (A-16, C4), no photo
+   ID (A-23, C4), no street address (A-11..A-13, C3).
+
+   Those live in the Intake proper, which the questionnaire defines as 47
+   rendered fields over about seven minutes with one upload, autosaving and
+   resumable. That is a platform instrument, not a static page.
 
    The endpoint below does not exist yet — the platform has the admissions
    contract but no route. Until it does, every submission takes the fallback
@@ -59,22 +67,69 @@
       setMsg("email", "");
     }
 
+    [["licence", "Select your licence."],
+     ["state", "Select the state you're licensed in."],
+     ["experience", "Select a range."]].forEach(function (pair) {
+      if (!values[pair[0]]) {
+        setMsg(pair[0], pair[1]);
+        first = first || document.getElementById(pair[0]);
+        ok = false;
+      } else {
+        setMsg(pair[0], "");
+      }
+    });
+
     if (first) first.focus();
     return ok;
   }
 
+  /* The fallback carries the C1 answers only. Mobile is C2 and marked
+     employer "no" in the contract, with introductions brokered by Prentice1 —
+     a plain email thread is outside every control that applies to it, so it
+     is left out and asked for again on the call. */
   function fallbackLink(values) {
     var subject = "Application — Prentice1 Cohort 1";
-    var body = "Name: " + values.name + "\nEmail: " + values.email + "\n";
+    var body =
+      "Name: " + values.name + "\n" +
+      "Email: " + values.email + "\n" +
+      "Licence: " + values.licence + "\n" +
+      "State: " + values.state + "\n" +
+      "Experience: " + values.experience + "\n" +
+      (values.goals ? "Goals: " + values.goals + "\n" : "");
     return MAILTO + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
   }
+
+  /* 50 states, DC and PR, matching A-14's allowed set. */
+  var STATES = ("Alabama,Alaska,Arizona,Arkansas,California,Colorado,Connecticut,Delaware," +
+    "District of Columbia,Florida,Georgia,Hawaii,Idaho,Illinois,Indiana,Iowa,Kansas,Kentucky," +
+    "Louisiana,Maine,Maryland,Massachusetts,Michigan,Minnesota,Mississippi,Missouri,Montana," +
+    "Nebraska,Nevada,New Hampshire,New Jersey,New Mexico,New York,North Carolina,North Dakota," +
+    "Ohio,Oklahoma,Oregon,Pennsylvania,Puerto Rico,Rhode Island,South Carolina,South Dakota," +
+    "Tennessee,Texas,Utah,Vermont,Virginia,Washington,West Virginia,Wisconsin,Wyoming").split(",");
+
+  (function fillStates() {
+    var sel = document.getElementById("state");
+    if (!sel) return;
+    var frag = document.createDocumentFragment();
+    STATES.forEach(function (name) {
+      var o = document.createElement("option");
+      o.textContent = name;
+      frag.appendChild(o);
+    });
+    sel.appendChild(frag);
+  })();
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
     var values = {
       name: form.name.value.trim(),
-      email: form.email.value.trim()
+      email: form.email.value.trim(),
+      phone: form.phone.value.trim(),
+      licence: form.licence.value,
+      state: form.state.value,
+      experience: form.experience.value,
+      goals: form.goals.value.trim()
     };
 
     // Honeypot: a person cannot see this field, so anything in it is a bot.
@@ -99,7 +154,7 @@
       .then(function (r) {
         if (!r.ok) throw new Error("HTTP " + r.status);
         form.reset();
-        say("ok", "<b>Thank you.</b> We'll email the full application to " +
+        say("ok", "<b>Thank you, that's your application in.</b> We'll reply to " +
           escapeHtml(values.email) + " within 3 business days.");
         submit.hidden = true;
       })

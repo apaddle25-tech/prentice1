@@ -33,7 +33,7 @@ encode pipeline is `scratchpad/encode.sh`; drop the new masters in and rerun.
 
 ---
 
-## BX-02 · Ambient motion on the dark heroes — UNRESOLVED
+## BX-02 · Ambient drift on the dark heroes exceeds the 600ms cap
 
 **Rule:** §07 Motion gives two instructions that cannot both be read
 literally. *"Everything uses `cubic-bezier(0.22, 0.7, 0.2, 1)`, stays under
@@ -41,14 +41,17 @@ literally. *"Everything uses `cubic-bezier(0.22, 0.7, 0.2, 1)`, stays under
 dark heroes. Transform only."* Drift is slow by nature; under 600ms it is not
 drift.
 
-**What ships:** the reference file's single static radial glow, no drift. The
-most conservative reading of the two.
+**What ships:** two radials on each dark hero, drifting on 26s and 34s loops,
+`alternate`, transform only, on the §07 curve. They never resolve to a state,
+which is the distinction being drawn: the 600ms cap governs transitions and
+entrances, where a visitor is waiting for something to finish. Ambient light
+is not something anyone waits for.
 
-**Decision:** open. Raised 2026-10-17, awaiting the owner. Either the radials
-become a named exception to the 600ms cap, or the ambient-light line is
-dropped from §07.
+**Decision:** Aneesh Patel, 2026-10-17 — granted as a named exception, so the
+cap stands everywhere else.
 
----
+**Closes when:** nothing. This is permanent unless §07 is rewritten to carve
+out ambient motion, at which point it stops being an exception.
 
 ## Decisions that are NOT exceptions
 
@@ -80,8 +83,20 @@ the README, which is the stated order.
 
 - **No FAQ on `/practices` or `/sponsors`.** §12 ends both secondary
   templates with one. Deferred by the owner, 2026-10-17; copy not written.
-- **`/apply` collects name and email only**, while the homepage's admission
-  step 01 describes "licence, state, experience and goals" as the five-minute
-  application. Those fields are classified under the platform's admissions
-  contract and belong behind the endpoint that honours it. Either `/apply`
-  grows when that route lands, or step 01 is reworded.
+- **The Intake proper is not on this site, and cannot be.** The owner asked
+  for everything to be captured at once rather than split across an emailed
+  follow-up, and `/apply` now does that for the fields it can hold: name,
+  email, licence type, state, experience and goals, all C1 in the admissions
+  contract, plus an optional mobile (C2). But `02_Intake_Questionnaire.md`
+  defines the Intake as **47 rendered fields over about seven minutes with one
+  upload**, autosaving and resumable, and Section A alone requires a
+  government photo ID (A-23, C4), a date of birth (A-16, C4, employer never),
+  SMS and email verification, and an audio clip. None of that belongs on a
+  static page with no backend to secure it, and its resumability — which the
+  questionnaire calls the highest-value remarketing audience in the funnel —
+  cannot exist without one. `/apply` is the front door; the Intake stays a
+  platform instrument.
+- **The site said "5-minute application"; the questionnaire says about seven.**
+  §1.2 principle 1 is explicitly about honest time estimates and withdraws an
+  earlier inflated claim. The hero, the final CTA and admission step 01 now say
+  seven minutes. Revisit if the Intake's scope changes.

@@ -339,10 +339,31 @@ p { margin: 0; }
   position: absolute; left: 0; right: 0; bottom: 0; height: 42%;
   background: linear-gradient(180deg, transparent, var(--charcoal));
 }
+/* Ambient light (§07): two drifting radials on the dark heroes, transform only.
+   BX-02 — a named exception to the 600ms cap. The cap governs transitions and
+   entrances; drift is ambient and cannot exist under it, so these run long and
+   slow and never resolve to a state. Transform only, so they stay off the
+   paint path. Reduced motion collapses them with everything else. */
 .hero__glow {
   position: absolute; left: -10%; top: -20%; width: 60%; height: 90%;
   background: radial-gradient(closest-side, rgba(201,169,110,0.14), transparent);
   pointer-events: none;
+  will-change: transform;
+  animation: drift-a 26s var(--ease) infinite alternate;
+}
+.hero__glow::after {
+  content: "";
+  position: absolute; left: 45%; top: 25%; width: 85%; height: 85%;
+  background: radial-gradient(closest-side, rgba(201,169,110,0.09), transparent);
+  animation: drift-b 34s var(--ease) infinite alternate;
+}
+@keyframes drift-a {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(5%, 4%, 0); }
+}
+@keyframes drift-b {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-7%, 5%, 0); }
 }
 
 .hero__inner {
@@ -897,3 +918,16 @@ p { margin: 0; }
 .plain h1 { font-size: clamp(38px, 5vw, 58px); line-height: 1.02; }
 .plain p { font-size: 16px; line-height: 1.65; color: var(--ink-2); }
 .plain__actions { display: flex; gap: var(--s-4); flex-wrap: wrap; margin-top: var(--s-2); }
+
+/* Select and textarea share the input treatment. */
+.field select,
+.field textarea {
+  background: #FFFFFF; border: 1px solid var(--rule);
+  padding: var(--s-4) var(--s-5); border-radius: var(--r-control); width: 100%;
+  transition: border-color var(--t-fast) var(--ease);
+}
+.field select:focus,
+.field textarea:focus { border-color: var(--charcoal); }
+.field select[aria-invalid="true"] { border-color: var(--state-err); }
+.field textarea { resize: vertical; min-height: 92px; font-family: inherit; }
+.field__opt { font-weight: 400; color: var(--ink-2); font-size: 13px; }

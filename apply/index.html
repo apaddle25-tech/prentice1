@@ -59,7 +59,7 @@
     <div class="apply__head">
       <div class="eyebrow">COHORT 1 · LOS ANGELES · JAN 25 – MAR 13, 2027</div>
       <h1>Apply for Cohort 1.</h1>
-      <p class="lede">Twenty seats, by application. Start here and we will send you the full application. Applications close January 10, 2027.</p>
+      <p class="lede">Twenty seats, by application. Everything we need is on this page — one sitting, no follow-up form to wait for. Applications close January 10, 2027.</p>
     </div>
 
     <dl class="apply__facts">
@@ -78,8 +78,55 @@
       <div class="field">
         <label for="email">Email</label>
         <input type="email" id="email" name="email" autocomplete="email" required aria-describedby="email-msg email-hint">
-        <p class="field__hint" id="email-hint">We send the full application here. Nothing else.</p>
+        <p class="field__hint" id="email-hint">We reply here, and nowhere else.</p>
         <p class="field__msg" id="email-msg" role="alert"></p>
+      </div>
+
+      <div class="field">
+        <label for="phone">Mobile <span class="field__opt">optional</span></label>
+        <input type="tel" id="phone" name="phone" autocomplete="tel" aria-describedby="phone-hint">
+        <p class="field__hint" id="phone-hint">Only if you'd rather we called than emailed.</p>
+      </div>
+
+      <div class="field">
+        <label for="licence">Licence</label>
+        <select id="licence" name="licence" required aria-describedby="licence-msg">
+          <option value="">Select your licence</option>
+          <option>RN</option>
+          <option>NP</option>
+          <option>PA-C</option>
+          <option>MD</option>
+          <option>DO</option>
+          <option>Other</option>
+        </select>
+        <p class="field__msg" id="licence-msg" role="alert"></p>
+      </div>
+
+      <div class="field">
+        <label for="state">State you're licensed in</label>
+        <select id="state" name="state" required aria-describedby="state-msg">
+          <option value="">Select a state</option>
+        </select>
+        <p class="field__msg" id="state-msg" role="alert"></p>
+      </div>
+
+      <div class="field">
+        <label for="experience">Years of clinical experience</label>
+        <select id="experience" name="experience" required aria-describedby="experience-msg">
+          <option value="">Select a range</option>
+          <option>Less than 1 year</option>
+          <option>1–2 years</option>
+          <option>3–5 years</option>
+          <option>6–10 years</option>
+          <option>More than 10 years</option>
+        </select>
+        <p class="field__msg" id="experience-msg" role="alert"></p>
+      </div>
+
+      <div class="field">
+        <label for="goals">What do you want from Cohort 1? <span class="field__opt">optional</span></label>
+        <textarea id="goals" name="goals" rows="4" maxlength="600" aria-describedby="goals-hint"></textarea>
+        <p class="field__hint" id="goals-hint">A couple of sentences is plenty.</p>
       </div>
 
       <!-- Not a real field. A bot fills everything it finds; a person never sees
@@ -100,10 +147,9 @@
     <section class="apply__next">
       <div class="eyebrow">WHAT HAPPENS NEXT</div>
       <ol class="apply__steps">
-        <li><span class="apply__n">01</span><span><b>We send the full application.</b> Licence, state, experience and goals. About five minutes.</span></li>
-        <li><span class="apply__n">02</span><span><b>Review and interview.</b> We reply within 3 business days and invite shortlisted applicants to a short interview.</span></li>
-        <li><span class="apply__n">03</span><span><b>Offer.</b> Your decision arrives with tuition and financing terms.</span></li>
-        <li><span class="apply__n">04</span><span><b>Reserve your seat.</b> A $1,000 refundable deposit holds your seat. Pay the balance or start a Cherry plan before Jan 25.</span></li>
+        <li><span class="apply__n">01</span><span><b>Review and interview.</b> We reply within 3 business days and invite shortlisted applicants to a short interview.</span></li>
+        <li><span class="apply__n">02</span><span><b>Offer.</b> Your decision arrives with tuition and financing terms.</span></li>
+        <li><span class="apply__n">03</span><span><b>Reserve your seat.</b> A $1,000 refundable deposit holds your seat. Pay the balance or start a Cherry plan before Jan 25.</span></li>
       </ol>
       <p class="apply__legal">Prentice1 is a training program, not a certifying body. Completing it does not authorize you to treat patients; scope of practice depends on your license and state. Nothing on this site is an offer of employment.</p>
     </section>
