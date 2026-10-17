@@ -411,6 +411,29 @@
     if (to && to !== location.pathname) location.replace(to);
   }
 
+  /* --------------------------------------------------------------------
+     Analytics
+
+     GA4 is agreed but the property does not exist yet. The tag is wired and
+     inert: set GA4_ID to the measurement ID and it starts, change nothing
+     else. It stays empty rather than carrying a placeholder because a tag
+     with a bogus ID still sends hits to Google — it would set cookies and
+     create a consent obligation while collecting nothing usable.
+     -------------------------------------------------------------------- */
+  var GA4_ID = "";   // e.g. "G-XXXXXXXXXX"
+
+  function initAnalytics() {
+    if (!GA4_ID) return;
+    var s = document.createElement("script");
+    s.async = true;
+    s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA4_ID;
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag("js", new Date());
+    window.gtag("config", GA4_ID);
+  }
+
   /* -------------------------------------------------------------------- */
   initHashRedirect();
   onReady(function () {
@@ -421,5 +444,6 @@
     initFaq();
     initReveal();
     initProgress();
+    initAnalytics();
   });
 })();
