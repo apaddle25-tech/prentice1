@@ -1,0 +1,8 @@
+# prentice1.com
+User-agent: *
+Allow: /
+
+# The policy stubs and 404 carry their own noindex; nothing is disallowed here,
+# so a crawler can still follow their links.
+
+Sitemap: https://prentice1.com/sitemap.xml
