@@ -477,6 +477,34 @@ p { margin: 0; }
 .audience__b { font-size: 14.5px; line-height: 1.5; color: var(--ink-2); }
 .audience__go { margin-top: var(--s-3); font-size: 14px; font-weight: 500; color: var(--gold-deep); }
 
+/* --- The audience tile on a phone ----------------------------------------
+   Below 320px per column the two halves stack, and the divider between them
+   is a LEFT border — drawn for a side-by-side layout that no longer exists.
+   Stacked, it becomes a stray vertical tick down the left edge of the second
+   half, and with one fill behind both the pair reads as a single block with a
+   line through it. At this width they are two cards instead, which is what
+   they already are to a reader: two different offers to two different people.
+
+   710px, not the 820px the nav uses, because that is where the halves actually
+   stack: two columns need 640px of tile, the tile is the viewport less two
+   gutters, and the gutter is 5vw through this range — so 0.9w < 640, w < 711 — 712 measured, with the gutter rounding. */
+@media (max-width: 712px) {
+  .audience__tile {
+    background: none; border: 0; border-radius: 0; box-shadow: none;
+    gap: var(--s-5);
+  }
+  .audience__half {
+    /* The subgrid aligns the four rows ACROSS the halves. Stacked they sit in
+       different row bands, so it aligns nothing and only complicates this. */
+    grid-row: auto; grid-template-rows: none;
+    background: var(--gold-wash);
+    border: 1px solid rgba(201, 169, 110, 0.55);
+    border-radius: var(--r-card);
+    box-shadow: var(--shadow-gold);
+  }
+  .audience__half--right { border-left: 1px solid rgba(201, 169, 110, 0.55); }
+}
+
 /* ============================================================================
    How it works
    ========================================================================= */
@@ -577,6 +605,35 @@ p { margin: 0; }
 .stat b { font-family: var(--numeral); font-weight: 400; font-size: clamp(52px, 6vw, 76px); line-height: 1; color: #FFFFFF; }
 .stat .stat--gold { color: var(--gold-light); }
 .stat span { font-size: 14px; color: var(--on-dark-dim); }
+
+/* --- The stat row on a phone ---------------------------------------------
+   Same fault as the audience tile, and a second one. The rules that divided
+   three columns are RIGHT borders, so stacked they become vertical ticks down
+   one edge of each figure. And the figures are centred, which is right in a
+   row of three and wrong in a single column, where they float against a band
+   whose heading, lede and disclaimer are all flush left.
+
+   So at this width the three facts stop being a row of columns and become
+   what they read as: a short list, left-aligned to the text above them, each
+   figure beside its label rather than stacked over it.
+
+   732px by the same arithmetic as the tile: three columns need 660px of row,
+   the row is the viewport less two 5vw gutters, so 0.9w < 660, w < 733, measured at 733. Below
+   that the row never has all three across again — it goes to two, then one —
+   and the list is the better form for both. */
+@media (max-width: 733px) {
+  .statrow { grid-template-columns: 1fr; margin-top: var(--s-8); }
+  .stat {
+    flex-direction: row; align-items: baseline; text-align: left;
+    gap: var(--s-6); padding: var(--s-6) 0;
+    border-right: 0; border-bottom: 1px solid rgba(236, 228, 214, 0.16);
+  }
+  .stat:last-child { border-bottom: 0; padding-bottom: 0; }
+  /* A shared minimum keeps the labels in a column of their own, so the three
+     read down the page as a list rather than as three separate statements. */
+  .stat b { font-size: 46px; flex: 0 0 auto; min-width: 2.2ch; }
+  .stat span { font-size: 15px; }
+}
 
 /* ============================================================================
    Who trains you
