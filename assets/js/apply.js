@@ -129,12 +129,15 @@
       licence: form.licence.value,
       state: form.state.value,
       experience: form.experience.value,
-      goals: form.goals.value.trim()
+      goals: form.goals.value.trim(),
+      // Sent, not filtered out here. A person cannot see this field, so anything
+      // in it is automated — and the server is the side that has to act on that,
+      // because a bot posting JSON directly never runs this file at all.
+      company: form.company.value
     };
 
-    // Honeypot: a person cannot see this field, so anything in it is a bot.
-    // Answer exactly as we would a real submission, and send nothing.
-    if (form.company.value) {
+    // Answer a local catch exactly as a real submission, and send nothing.
+    if (values.company) {
       say("ok", "<b>Thank you.</b> We'll be in touch.");
       return;
     }
