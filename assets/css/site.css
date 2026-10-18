@@ -931,3 +931,18 @@ p { margin: 0; }
 .field select[aria-invalid="true"] { border-color: var(--state-err); }
 .field textarea { resize: vertical; min-height: 92px; font-family: inherit; }
 .field__opt { font-weight: 400; color: var(--ink-2); font-size: 13px; }
+
+/* Prose pages (the privacy notice, and anything else that is mostly words). */
+.prose { max-width: 680px; gap: 0; }
+.prose h1 { margin-bottom: var(--s-6); }
+.prose h2 {
+  font-size: 26px; line-height: 1.2; margin-top: var(--s-11);
+  padding-top: var(--s-7); border-top: 1px solid var(--rule);
+}
+.prose p { margin-top: var(--s-5); font-size: 16px; line-height: 1.7; color: var(--ink-2); }
+.prose p b, .prose li b { color: var(--ink); font-weight: 500; }
+.prose a { text-decoration: underline; }
+.prose__lede { font-size: 18px; color: var(--ink); }
+.prose__meta { font-size: 14px; color: var(--ink-2); }
+.prose__list { margin: var(--s-5) 0 0; padding-left: var(--s-7); display: flex; flex-direction: column; gap: var(--s-3); font-size: 16px; line-height: 1.7; color: var(--ink-2); }
+.prose .plain__actions { margin-top: var(--s-11); }
