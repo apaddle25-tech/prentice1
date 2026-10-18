@@ -71,9 +71,19 @@
 <main id="main">
 
   <!-- Hero ----------------------------------------------------------------- -->
-  <section class="hero hero--split">
+  <section class="hero">
+    <div class="hero__media">
+      <video class="hero__video hero__video--syringe" data-bgv autoplay muted loop playsinline preload="metadata"
+             poster="/assets/img/syringe-portrait-poster.jpg" aria-hidden="true">
+        <source src="/assets/video/syringe-portrait.webm" type="video/webm">
+        <source src="/assets/video/syringe-portrait.mp4" type="video/mp4">
+      </video>
+      <div class="hero__scrim" aria-hidden="true"></div>
+      <div class="hero__fade" aria-hidden="true"></div>
+      <button class="pause-pill" data-video-toggle type="button" aria-label="Pause background video">❚❚ PAUSE</button>
+    </div>
     <div class="hero__glow" aria-hidden="true"></div>
-    <div class="hero__inner hero__inner--centred">
+    <div class="hero__inner hero__inner--closed">
       <div class="hero__col">
         <div class="eyebrow eyebrow--on-dark">FOR SPONSORS · COHORT 1 · JAN 18 – MAR 13, 2027</div>
         <h1 class="hero__h1 hero__h1--lg">Be their first product.</h1>
@@ -82,15 +92,6 @@
           <a class="btn btn--gold" href="https://calendly.com/hello-prentice1/30min">Book a call</a>
           <a class="btn btn--outline" href="#call">Request the prospectus</a>
         </div>
-      </div>
-      <div class="media-4x5 media-4x5--md">
-        <video data-bgv autoplay muted loop playsinline preload="metadata"
-               poster="/assets/img/syringe-portrait-poster.jpg" aria-hidden="true">
-          <source src="/assets/video/syringe-portrait.webm" type="video/webm">
-          <source src="/assets/video/syringe-portrait.mp4" type="video/mp4">
-        </video>
-        <div class="media-4x5__ring" aria-hidden="true"></div>
-        <button class="pause-pill pause-pill--corner" data-video-toggle type="button" aria-label="Pause background video">❚❚ PAUSE</button>
       </div>
     </div>
   </section>

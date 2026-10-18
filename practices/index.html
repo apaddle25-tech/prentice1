@@ -71,9 +71,19 @@
 <main id="main">
 
   <!-- Hero ----------------------------------------------------------------- -->
-  <section class="hero hero--split">
+  <section class="hero">
+    <div class="hero__media">
+      <video class="hero__video hero__video--assessment" data-bgv autoplay muted loop playsinline preload="metadata"
+             poster="/assets/img/assessment-poster.jpg" aria-hidden="true">
+        <source src="/assets/video/assessment.webm" type="video/webm">
+        <source src="/assets/video/assessment.mp4" type="video/mp4">
+      </video>
+      <div class="hero__scrim" aria-hidden="true"></div>
+      <div class="hero__fade" aria-hidden="true"></div>
+      <button class="pause-pill" data-video-toggle type="button" aria-label="Pause background video">❚❚ PAUSE</button>
+    </div>
     <div class="hero__glow" aria-hidden="true"></div>
-    <div class="hero__inner hero__inner--split">
+    <div class="hero__inner">
       <div class="hero__col">
         <div class="eyebrow eyebrow--on-dark">FOR PRACTICES · PRENTICE DAY · MARCH 13, 2027 · LOS ANGELES</div>
         <h1 class="hero__h1 hero__h1--sm">Hire a trained injector without the 20% recruiter fee.</h1>
@@ -83,15 +93,6 @@
           <a class="btn btn--outline" href="#book">Reserve a table</a>
         </div>
         <p class="hero__micro">Invoiced to your practice. No card checkout.</p>
-      </div>
-      <div class="media-4x5 media-4x5--top">
-        <video data-bgv autoplay muted loop playsinline preload="metadata"
-               poster="/assets/img/assessment-poster.jpg" aria-hidden="true">
-          <source src="/assets/video/assessment.webm" type="video/webm">
-          <source src="/assets/video/assessment.mp4" type="video/mp4">
-        </video>
-        <div class="media-4x5__ring" aria-hidden="true"></div>
-        <button class="pause-pill pause-pill--corner" data-video-toggle type="button" aria-label="Pause background video">❚❚ PAUSE</button>
       </div>
     </div>
 
