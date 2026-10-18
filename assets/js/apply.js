@@ -17,15 +17,16 @@
    rendered fields over about seven minutes with one upload, autosaving and
    resumable. That is a platform instrument, not a static page.
 
-   The endpoint below does not exist yet — the platform has the admissions
-   contract but no route. Until it does, every submission takes the fallback
-   path and hands the visitor a pre-addressed email, so the page is useful from
-   the day it ships rather than from the day the route lands.
+   If the endpoint is unreachable — not yet deployed, the visitor offline, the
+   request blocked — the submission falls back to a pre-addressed email, so the
+   page is useful whatever the state of the platform behind it.
    ========================================================================= */
 (function () {
   "use strict";
 
-  var ENDPOINT = "https://app.prentice1.com/v1/applications";
+  // /api/, not /v1/: the API is a private Render service, and app.prentice1.com
+  // rewrites /api/:path* to its /v1/:path*. /v1/ from a browser is a 404.
+  var ENDPOINT = "https://app.prentice1.com/api/applications";
   var MAILTO = "mailto:hello@prentice1.com";
 
   var form = document.getElementById("applyForm");

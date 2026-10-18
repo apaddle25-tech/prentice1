@@ -338,10 +338,17 @@
      with anything unexpected, "Log in" is the honest thing to show, and it
      still works — the app sends anyone without a session to its own sign-in.
 
-     The path is /v1/session-state. An earlier draft of this script called
-     /api/session-state, which 404s; because the failure path is also the
-     default, that bug was invisible — it just never showed Dashboard to
-     anyone. Verify against the live app after any change here.
+     THE PATH IS /api/, NOT /v1/. The API defines the route as
+     /v1/session-state, but the API is a PRIVATE Render service that nothing
+     outside can reach. app.prentice1.com is Next, and next.config.ts rewrites
+     /api/:path* to the API's /v1/:path*. So /v1/session-state 404s from a
+     browser and /api/session-state is the public path — measured, not
+     reasoned: 404 and 200 respectively.
+
+     This is worth a comment because the failure is invisible. Signed-out is
+     also the designed fallback, so a wrong path here does not throw or look
+     broken; it just silently never shows Dashboard to anyone, ever. Verify
+     against the live app after any change.
      -------------------------------------------------------------------- */
   function initAuthNav() {
     var APP = "https://app.prentice1.com";
@@ -362,7 +369,7 @@
     show(false);
 
     function check() {
-      fetch(APP + "/v1/session-state", { credentials: "include", cache: "no-store" })
+      fetch(APP + "/api/session-state", { credentials: "include", cache: "no-store" })
         .then(function (r) { return r.ok ? r.json() : null; })
         .then(function (s) { show(!!(s && s.signed_in === true)); })
         .catch(function () { show(false); });
