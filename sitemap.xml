@@ -22,7 +22,11 @@
   </url>
   <url>
     <loc>https://prentice1.com/privacy/</loc>
-    <lastmod>2026-10-17</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <priority>0.3</priority>
   </url>
+  <!-- /about, /terms, /refund and /accessibility are deliberately absent: each
+       still carries noindex,follow while it is a stub, and a sitemap that lists
+       a noindex page is a contradiction Search Console reports as an error.
+       Add them here in the same change that removes their noindex. -->
 </urlset>

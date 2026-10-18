@@ -79,10 +79,28 @@ the README, which is the stated order.
   all. The tween also honours §07's curve and cap, which native smooth scroll
   cannot be told to do.
 
-## Known gaps, not yet decided
+## Closed
 
-- **No FAQ on `/practices` or `/sponsors`.** §12 ends both secondary
-  templates with one. Deferred by the owner, 2026-10-17; copy not written.
+- **FAQ on `/practices` and `/sponsors`.** §12 ends both secondary templates
+  with one, and both were missing. Written and shipped 2026-10-18: five
+  questions each, using the homepage's `[data-faq]` markup, so `initFaq` picks
+  them up with no JavaScript change. The sponsor set leads with disclosure and
+  with what sponsorship cannot touch, which is what a medical-affairs reviewer
+  reads first.
+
+- **Sponsor tier capacity.** The tiers carried over from the previous site
+  offered "one full training day exclusively using your product" at both Gold
+  and Diamond, five slots each — up to ten exclusive days inside a five-day
+  intensive — and five Prentice Day tickets per Diamond slot, which at five
+  slots is 25 sponsor attendees at an event for 20 learners. Neither is
+  deliverable. Shipped 2026-10-18: the exclusive day is Diamond only, three
+  slots, one each for toxin, filler and biostimulator (the intensive's other
+  two days, cadaver anatomy and consultation, use no product); Gold drops to
+  three slots and carries a disclosed product-specific session instead;
+  tickets are capped at two. Prices are unchanged. Decided by the owner,
+  2026-10-18.
+
+## Known gaps, not yet decided
 - **The Intake proper is not on this site, and cannot be.** The owner asked
   for everything to be captured at once rather than split across an emailed
   follow-up, and `/apply` now does that for the fields it can hold: name,
@@ -100,3 +118,20 @@ the README, which is the stated order.
   §1.2 principle 1 is explicitly about honest time estimates and withdraws an
   earlier inflated claim. The hero, the final CTA and admission step 01 now say
   seven minutes. Revisit if the Intake's scope changes.
+
+- **Three policy pages are still stubs.** `/terms`, `/refund` and
+  `/accessibility` each say they are being written and point at
+  `hello@prentice1.com`. They are `noindex,follow` and deliberately absent from
+  `sitemap.xml` for that reason; add them there in the same change that removes
+  the noindex. The refund terms are the one that costs conversions — the
+  2026-10-16 audit called a missing refund policy enough on its own to stop a
+  qualified applicant at a $15,000 decision — and they are owner and counsel
+  work, not copy. The homepage FAQ no longer shows a bracketed placeholder in
+  their place; it states that the deposit is refundable, that the full terms
+  land before applications close, and how to get them sooner.
+
+- **The intensive's location.** The curriculum says California; this site says
+  Los Angeles in its title, canonical URL, OG images and schema. As of
+  2026-10-18 the intensive is published as California and Prentice Day as Los
+  Angeles, which matches both sources but reads oddly on one page. Confirm the
+  venue and make the two agree.

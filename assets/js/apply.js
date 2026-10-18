@@ -159,7 +159,7 @@
         if (!r.ok) throw new Error("HTTP " + r.status);
         form.reset();
         say("ok", "<b>Thank you, that's your application in.</b> We'll reply to " +
-          escapeHtml(values.email) + " within 3 business days.");
+          escapeHtml(values.email) + " within 5 business days.");
         submit.hidden = true;
       })
       .catch(function () {
