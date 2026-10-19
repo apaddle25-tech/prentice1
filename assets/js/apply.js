@@ -158,8 +158,12 @@
       .then(function (r) {
         if (!r.ok) throw new Error("HTTP " + r.status);
         form.reset();
-        say("ok", "<b>Thank you, that's your application in.</b> We'll reply to " +
-          escapeHtml(values.email) + " within 5 business days.");
+        /* Describes the next step and promises no clock. The only response time
+           this page states is "within 5 business days OF THE INTERVIEW", three
+           steps later — repeating the number here without that qualifier reads
+           as five days from now, which nothing delivers. */
+        say("ok", "<b>Thank you — we have your details.</b> We'll check your licence and email " +
+          escapeHtml(values.email) + " with the full application.");
         submit.hidden = true;
       })
       .catch(function () {
