@@ -863,6 +863,22 @@ p { margin: 0; }
 /* The practices fact bar has no vertical rules between items. */
 .factbar--flush .factbar__item { border-right: 0; padding-left: 0; padding-right: var(--s-7); }
 
+/* /practices on a phone: the first screen ends on the two CTAs and the
+   invoicing line, and the fact bar waits below the fold. Left alone, the hero
+   stopped a third of the way down a tall phone and the fee and date crowded
+   up under the buttons. So the intro fills the screen under the sticky header
+   (68px on a phone) and sits its words at the bottom, which also gives the
+   clip's band room above the headline. svh, not vh: measured with the
+   browser's toolbars showing, so the fold is the one a visitor lands on. */
+@media (max-width: 820px) {
+  .hero__inner--fold {
+    min-height: calc(100vh - 68px);
+    min-height: calc(100svh - 68px);
+    align-content: flex-end;
+  }
+  .hero__inner--fold .hero__col { padding-bottom: var(--s-9); }
+}
+
 /* --- Numbered step cards -------------------------------------------------- */
 .step-card {
   background: var(--cream); border: 1px solid var(--rule);
@@ -992,6 +1008,14 @@ p { margin: 0; }
 .footer__row { display: flex; flex-wrap: wrap; gap: var(--s-4) 28px; align-items: center; font-size: 14px; }
 .footer__row a { color: var(--on-dark); }
 .footer__row a:hover { color: var(--gold-light); }
+/* On a phone the single row wrapped wherever it ran out, leaving the last link
+   alone under the wordmark. Below the width the longest row (/apply, five
+   links) needs, the wordmark takes its own line and the links fall into two
+   aligned columns. */
+@media (max-width: 680px) {
+  .footer__row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-4) var(--s-8); }
+  .footer__row .wordmark { grid-column: 1 / -1; margin-bottom: var(--s-2); }
+}
 
 /* ============================================================================
    /apply — single column on cream, no payment step (brand book §12)
