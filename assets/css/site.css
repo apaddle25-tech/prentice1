@@ -863,10 +863,10 @@ p { margin: 0; }
 /* The practices fact bar has no vertical rules between items. */
 .factbar--flush .factbar__item { border-right: 0; padding-left: 0; padding-right: var(--s-7); }
 
-/* /practices on a phone: the first screen ends on the two CTAs and the
-   invoicing line, and the fact bar waits below the fold. Left alone, the hero
-   stopped a third of the way down a tall phone and the fee and date crowded
-   up under the buttons. So the intro fills the screen under the sticky header
+/* The homepage and /practices on a phone: the first screen ends on the two
+   CTAs and the line under them, and the fact bar waits below the fold. Left
+   alone, the hero stopped a third of the way down a tall phone and the facts
+   crowded up under the buttons. So the intro fills the screen under the sticky header
    (68px on a phone) and sits its words at the bottom, which also gives the
    clip's band room above the headline. svh, not vh: measured with the
    browser's toolbars showing, so the fold is the one a visitor lands on. */
@@ -877,6 +877,9 @@ p { margin: 0; }
     align-content: flex-end;
   }
   .hero__inner--fold .hero__col { padding-bottom: var(--s-9); }
+  /* The space above the words is the fold's job now; the homepage spacer
+     only pushed its micro line off a 667px-tall screen. */
+  .hero__inner--fold .hero__spacer { display: none; }
 }
 
 /* --- Numbered step cards -------------------------------------------------- */
