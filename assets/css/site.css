@@ -863,6 +863,32 @@ p { margin: 0; }
 /* The practices fact bar has no vertical rules between items. */
 .factbar--flush .factbar__item { border-right: 0; padding-left: 0; padding-right: var(--s-7); }
 
+/* Wrapped fact bars. The rules above assume one row: only the first item
+   drops its left padding and only the last its rule. auto-fit wrapped the
+   homepage's five items 4+1 or 2+2+1 below about 1120px, indenting every row
+   after the first and hanging a vertical rule down the middle of a phone.
+   So the column count is fixed wherever the bar would wrap, and each
+   breakpoint says which items start and end a row. */
+@media (max-width: 1120px) and (min-width: 821px) {
+  .factbar:not(.factbar--flush) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .factbar:not(.factbar--flush) .factbar__item:nth-child(3n+1) { padding-left: 0; }
+  .factbar:not(.factbar--flush) .factbar__item:nth-child(3n) { padding-right: 0; border-right: 0; }
+}
+@media (max-width: 900px) and (min-width: 821px) {
+  .factbar--flush { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+/* On a phone, one list: label over value, a hairline between items. */
+@media (max-width: 820px) {
+  .factbar { grid-template-columns: minmax(0, 1fr); }
+  .factbar .factbar__item,
+  .factbar--flush .factbar__item {
+    padding: var(--s-6) 0; border-right: 0;
+    border-bottom: 1px solid rgba(236, 228, 214, 0.12);
+  }
+  .factbar .factbar__item:last-child { border-bottom: 0; padding-bottom: var(--s-8); }
+  .factbar dd { margin-top: var(--s-1); }
+}
+
 /* The homepage and /practices on a phone: the first screen ends on the two
    CTAs and the line under them, and the fact bar waits below the fold. Left
    alone, the hero stopped a third of the way down a tall phone and the facts
