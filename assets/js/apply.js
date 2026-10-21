@@ -68,7 +68,7 @@
       setMsg("email", "");
     }
 
-    [["licence", "Select your licence."],
+    [["licence", "Select your license."],
      ["state", "Select the state you're licensed in."],
      ["experience", "Select a range."]].forEach(function (pair) {
       if (!values[pair[0]]) {
@@ -93,7 +93,7 @@
     var body =
       "Name: " + values.name + "\n" +
       "Email: " + values.email + "\n" +
-      "Licence: " + values.licence + "\n" +
+      "License: " + values.licence + "\n" +
       "State: " + values.state + "\n" +
       "Experience: " + values.experience + "\n" +
       (values.goals ? "Goals: " + values.goals + "\n" : "");
@@ -162,7 +162,7 @@
            this page states is "within 5 business days OF THE INTERVIEW", three
            steps later — repeating the number here without that qualifier reads
            as five days from now, which nothing delivers. */
-        say("ok", "<b>Thank you — we have your details.</b> We'll check your licence and email " +
+        say("ok", "<b>Thank you — we have your details.</b> We'll check your license and email " +
           escapeHtml(values.email) + " with the full application.");
         submit.hidden = true;
       })
