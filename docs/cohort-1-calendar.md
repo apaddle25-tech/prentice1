@@ -7,7 +7,8 @@ backwards from them:
 1. **Prentice Day is Saturday 13 March 2027.**
 2. **Prentice Day is the day after the five-day intensive ends.**
 
-Decided by the owner, 2026-10-18, with decisions D1–D6 (below).
+Decided by the owner, 2026-10-18, with decisions D1–D6 (below). Amended by the owner on 2026-10-27: the exam
+moves after Module 6 week and clearance to T−4 (see *Amended 27 October 2026*). Both anchors are unchanged.
 
 ---
 
@@ -26,10 +27,10 @@ rest follows from the intervals the six-week curriculum specifies:
 | Interval | Source |
 |---|---|
 | Intensive runs 5 consecutive days | 05 In Person & Graduation |
-| Clearance decision exactly 7 days before the intensive (T−7) | 00 Spine J19 |
+| Clearance decision 4 days before the intensive (T−4) | Owner, 27 Oct 2026 (was T−7, 00 Spine J19) |
 | Pre-arrival window T−12 to T−1, briefing at T−2 | 05 §1.6 |
 | Six online Modules of 7 days each | 04 Online Learning & Assessment §2 |
-| Exam and oral review on days 39–41 | 00 Spine J17–J18 |
+| Exam and oral review on days 43–45, after Module 6 week | Owner, 27 Oct 2026 (was days 39–41, 00 Spine J17–J18) |
 | Pre-cohort runway days −14 to 0 | 03 Enrollment, Payment & Onboarding §8 |
 
 ## The calendar
@@ -48,13 +49,13 @@ rest follows from the intervals the six-week curriculum specifies:
 | **M4 Safety & Complications** · week 4 | Mon 8 – Sun 14 Feb 2027 | days 22–28 |
 | **M5 Consultation, Assessment & Planning** · week 5 | Mon 15 – Sun 21 Feb 2027 | days 29–35 |
 | **M6 Practice & Business** · week 6 | Mon 22 – Sun 28 Feb 2027 | days 36–42 |
-| Foundations Exam and oral review | Thu 25 – Sat 27 Feb 2027 | days 39–41 |
-| Clearance decision (T−7) | Mon 1 Mar 2027 | J19 |
+| Foundations Exam and oral review | Mon 1 – Wed 3 Mar 2027 | days 43–45 |
+| Clearance decision (T−4) | Thu 4 Mar 2027 | J19 |
 | Pre-arrival window (T−12 → T−1) | Wed 24 Feb – Sun 7 Mar 2027 | J20 |
 | Day-before briefing (T−2) | Sat 6 Mar 2027 | J20 |
 | **Five-day intensive, California** | Mon 8 – Fri 12 Mar 2027 | J21–J24 |
 | **Prentice Day — Los Angeles** | **Sat 13 Mar 2027** | J25 |
-| Match: profile, introductions, interviews, offer | from Mon 15 Mar 2027 | J26–J29 |
+| The Prentice Match: profile, introductions, interviews, offer | from Mon 15 Mar 2027 | J26–J29 |
 | First 90 days, check-ins at days 7, 30, 60, 90 | from the first day in role | J30 |
 
 Day 1 to Prentice Day is 54 days — about eight weeks, plus the pre-cohort
@@ -103,6 +104,25 @@ on a Sunday. Holding the intervals instead of the labels makes clearance
 is preserved; only the ordinals move. Docs 03, 05, 10 and 11 still carry the
 older five-week dates (intensive days 35–39) and need reconciling against this
 table.
+
+## Amended 27 October 2026
+
+The owner moved the exam and clearance so the exam no longer overlaps Module 6
+week, on the condition that Prentice Day stays on its weekend. It does:
+
+- **Foundations Exam and oral review: Mon 1 – Wed 3 Mar 2027** (days 43–45; was
+  Thu 25 – Sat 27 Feb, which fell inside Module 6 week).
+- **Clearance decision: Thu 4 Mar 2027** (day 46, T−4; was Mon 1 Mar, T−7).
+- Unchanged: the pre-arrival window, the briefing on Sat 6 Mar, the intensive
+  Mon 8 – Fri 12 Mar and **Prentice Day, Sat 13 Mar**.
+
+The cost is three days between clearance and the briefing instead of five, so
+travel booked on clearance has less notice. The curriculum's T−7 (00 Spine J19)
+needs amending to match. The platform's calendar (`content/pilot/cohort-calendar.json`
+in prentice1-platform, DL-054) carries the same dates.
+
+The day-number paragraph above describes the calendar as derived on 18 October;
+under this amendment clearance is day 46, not day 43.
 
 ## Open, and not settled by this table
 
