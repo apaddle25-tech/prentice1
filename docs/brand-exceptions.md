@@ -128,8 +128,9 @@ the README, which is the stated order.
   2026-10-16 audit called a missing refund policy enough on its own to stop a
   qualified applicant at a $15,000 decision — and they are owner and counsel
   work, not copy. The homepage FAQ no longer shows a bracketed placeholder in
-  their place; it states that the deposit is refundable, that the full terms
-  land before applications close, and how to get them sooner.
+  their place; it states that the $1,000 deposit is non-refundable (owner,
+  2026-10-28), that the full terms land before applications close, and how
+  to get them sooner.
 
 - **The intensive's location.** The curriculum says California; this site says
   Los Angeles in its title, canonical URL, OG images and schema. As of
