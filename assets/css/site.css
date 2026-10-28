@@ -775,6 +775,10 @@ p { margin: 0; }
 .plans { grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: var(--s-8); }
 .plan__from { font-size: 13px; color: var(--ink-2); margin-top: var(--s-1); }
 .plan__desc { font-size: 15px; line-height: 1.6; color: var(--ink-2); }
+/* Financing sits under each price, where the number lands, rather than in
+   the hero fact bar, which it crowded. */
+.plan__fin { font-size: 14px; font-weight: 500; color: var(--gold-deep); }
+.plan--rec .plan__fin { color: var(--gold-light); }
 /* Doubled class: .tier (declared later) would otherwise restore the top padding. */
 .tier.plan--rec { border-color: var(--gold); padding-top: 0; }
 .plan--rec .plan__from,
