@@ -309,7 +309,8 @@
      section reads in full without this script (§13). Here the list becomes
      a vertical tablist and every figure moves into one stage beside it.
 
-     It steps every 6s. It stops while the pointer is over it or focus is in
+     It steps every 6s, except that the 3D panel stays up until its clip has
+     played through once from the start, so the peel is always seen. It stops while the pointer is over it or focus is in
      it, while it is off screen or the tab is hidden, and never starts under
      reduced motion. A visitor who picks a feature has taken over, so the
      tour stops for good. The pause pill is the WCAG 2.2.2 control. The only
@@ -372,14 +373,24 @@
     var current = 0;
     var video = stage.querySelector("[data-features-video]");
     if (video) {
-      // The autoplay attribute is for a visitor without this script; with it,
-      // playback is ours, and a hidden panel's clip must not decode unseen.
+      // The autoplay and loop attributes are for a visitor without this
+      // script. With it, playback is ours: a hidden panel's clip must not
+      // decode unseen, and the end of the clip is what moves the tour on.
       video.removeAttribute("autoplay");
+      video.loop = false;
       video.addEventListener("play", function () { syncVideo(); });
+      video.addEventListener("ended", function () {
+        if (running()) { step(); return; }
+        video.currentTime = 0;
+        syncVideo();
+      });
     }
 
     function select(i, focus) {
+      var was = current;
       current = (i + tabs.length) % tabs.length;
+      // The clip opens on the peel; arriving at it again starts it over.
+      if (video && current !== was && figs[current].contains(video)) video.currentTime = 0;
       tabs.forEach(function (t, n) {
         var on = n === current;
         t.setAttribute("aria-selected", on ? "true" : "false");
@@ -414,11 +425,28 @@
       }
     }
 
+    /* The 3D panel waits for the clip's "ended"; its timer is only a
+       backstop for a clip that never loads or is refused playback. */
+    function schedule() {
+      clearTimeout(timer);
+      var onClip = video && figs[current].contains(video);
+      timer = setTimeout(step, onClip ? 16000 : 6000);
+    }
+
+    function step() {
+      // From "ended", the 3D panel's backstop is still pending: clear it, or
+      // it fires on a later panel and cuts that one short.
+      clearTimeout(timer);
+      timer = null;
+      select(current + 1, false);
+      sync();
+    }
+
     function sync() {
       if (running() && !timer) {
-        timer = setInterval(function () { select(current + 1, false); }, 6000);
+        schedule();
       } else if (!running() && timer) {
-        clearInterval(timer); timer = null;
+        clearTimeout(timer); timer = null;
       }
       pause.textContent = stopped ? "▶ PLAY" : "❚❚ PAUSE";
       pause.setAttribute("aria-label", stopped ? "Play the feature tour" : "Pause the feature tour");
