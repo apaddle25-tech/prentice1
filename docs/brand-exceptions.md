@@ -116,8 +116,9 @@ the README, which is the stated order.
   platform instrument.
 - **The site said "5-minute application"; the questionnaire says about seven.**
   §1.2 principle 1 is explicitly about honest time estimates and withdraws an
-  earlier inflated claim. The hero, the final CTA and admission step 01 now say
-  seven minutes. Revisit if the Intake's scope changes.
+  earlier inflated claim. The hero and the final CTA now say seven minutes.
+  As of 2026-10-28 the admission steps carry no durations at all, by the
+  owner's decision. Revisit if the Intake's scope changes.
 
 - **Three policy pages are still stubs.** `/terms`, `/refund` and
   `/accessibility` each say they are being written and point at

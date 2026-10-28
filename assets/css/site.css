@@ -759,10 +759,10 @@ p { margin: 0; }
 .steps__t { font-size: 16px; font-weight: 500; color: #FFFFFF; }
 .steps__d { font-size: 14.5px; line-height: 1.55; color: var(--on-dark-dim); }
 .panel-dark__cta { align-self: flex-start; }
-/* Full-width admission panel under the pathways: the five steps read as one
+/* Full-width admission panel under the pathways: the four steps read as one
    row on wide screens, and fall back to the stacked list below 1000px. */
 @media (min-width: 1000px) {
-  .panel-dark--wide .steps { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); column-gap: var(--s-8); }
+  .panel-dark--wide .steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: var(--s-8); }
   .panel-dark--wide .steps li { grid-template-columns: minmax(0, 1fr); align-content: start; gap: var(--s-4); border-bottom: 0; border-top: 1px solid var(--divider-dark); }
 }
 
