@@ -740,18 +740,11 @@ p { margin: 0; }
    Tuition and admissions
    ========================================================================= */
 
-.tuition { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); gap: clamp(32px, 5vw, 64px); align-items: start; }
-.tuition__left { display: flex; flex-direction: column; gap: var(--s-7); }
-.price { font-family: var(--numeral); font-weight: 400; font-size: clamp(64px, 8vw, 96px); line-height: 0.9; color: var(--charcoal); }
-.tuition__fin { font-size: 16px; line-height: 1.6; color: var(--ink-2); }
-.tuition__lists { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: var(--s-8); border-top: 1px solid var(--charcoal); padding-top: var(--s-7); }
-.tuition__lt { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: var(--s-2); }
 .ticks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; font-size: 14.5px; line-height: 1.45; color: var(--ink); }
 .ticks li { display: flex; gap: var(--s-2); }
 .ticks .tick { color: var(--gold-deep); }
 .ticks--muted { color: var(--ink-2); }
 .ticks--muted .tick { color: inherit; }
-.tuition__policy { display: inline-block; margin-top: var(--s-6); font-size: 14px; text-decoration: underline; }
 
 .panel-dark {
   background: var(--charcoal); border-radius: var(--r-card);
@@ -766,6 +759,12 @@ p { margin: 0; }
 .steps__t { font-size: 16px; font-weight: 500; color: #FFFFFF; }
 .steps__d { font-size: 14.5px; line-height: 1.55; color: var(--on-dark-dim); }
 .panel-dark__cta { align-self: flex-start; }
+/* Full-width admission panel under the pathways: the five steps read as one
+   row on wide screens, and fall back to the stacked list below 1000px. */
+@media (min-width: 1000px) {
+  .panel-dark--wide .steps { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); column-gap: var(--s-8); }
+  .panel-dark--wide .steps li { grid-template-columns: minmax(0, 1fr); align-content: start; gap: var(--s-4); border-bottom: 0; border-top: 1px solid var(--divider-dark); }
+}
 
 /* --- Pathways: Foundations and Academy --------------------------------------
    Built on the sponsor .tier cards (§12 stacked cards). Academy is the
@@ -809,6 +808,15 @@ p { margin: 0; }
 .ledger .ledger__total { border-bottom-color: var(--charcoal); }
 .ledger__total dt { color: var(--ink); font-weight: 500; }
 .ledger .ledger__save { border-bottom: 0; }
+/* "Not included" closes the two-step panel as its footer, across both columns. */
+.upgrade__foot {
+  grid-column: 1 / -1;
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: var(--s-2) var(--s-8);
+  padding-top: var(--s-6); border-top: 1px solid rgba(201, 169, 110, 0.55);
+}
+.upgrade .upgrade__foot p { font-size: 14px; }
+.upgrade__foot b { font-weight: 500; color: var(--ink); }
+.upgrade__foot a { font-size: 14px; text-decoration: underline; }
 .ledger__save dt, .ledger__save dd { color: var(--gold-deep); font-weight: 500; }
 
 /* ============================================================================
