@@ -1,0 +1,12 @@
+// Cloudflare Workers config, used only for preview builds of pull requests.
+// prentice1.com itself is still served by GitHub Pages from main; this just
+// tells the Worker to serve the repo root as static files, unchanged.
+{
+  "name": "prentice1",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": ".",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  }
+}
