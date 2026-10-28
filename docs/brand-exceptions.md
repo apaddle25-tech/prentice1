@@ -21,7 +21,8 @@ ungloved hands, unrealistic injection sites."* Reinforced by §02 rule 10,
 hero, the Prentice Day band, the final CTA, and both secondary-page heroes:
 the most prominent moving images on the site.
 
-**Compliant today and unaffected:** `screenshare` (a real platform
+**Compliant today and unaffected:** the online classroom captures
+(`classroom/*` and `classroom-anatomy`, real platform screens and a real
 recording), `rivkin`, `faculty/group.jpg` and the four faculty portraits.
 
 **Decision:** Aneesh Patel, 2026-10-17 — ship under a documented exception

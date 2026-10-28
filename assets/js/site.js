@@ -303,6 +303,179 @@
   }
 
   /* --------------------------------------------------------------------
+     Online classroom feature tour
+
+     The markup is a plain list, each item carrying its own figure, so the
+     section reads in full without this script (§13). Here the list becomes
+     a vertical tablist and every figure moves into one stage beside it.
+
+     It steps every 6s. It stops while the pointer is over it or focus is in
+     it, while it is off screen or the tab is hidden, and never starts under
+     reduced motion. A visitor who picks a feature has taken over, so the
+     tour stops for good. The pause pill is the WCAG 2.2.2 control. The only
+     motion is a 380ms crossfade (§07).
+     -------------------------------------------------------------------- */
+  function initFeatures() {
+    var root = document.querySelector("[data-features]");
+    if (!root) return;
+
+    var list  = root.querySelector(".features__list");
+    var items = Array.prototype.slice.call(root.querySelectorAll(".features__item"));
+    if (!list || items.length < 2) return;
+
+    var menu  = document.createElement("div");
+    var stage = document.createElement("div");
+    var ctrl  = document.createElement("div");
+    var pause = document.createElement("button");
+    menu.className = "features__menu";
+    stage.className = "features__stage";
+    ctrl.className = "features__ctrl";
+    pause.type = "button";
+    pause.className = "features__pause";
+
+    list.setAttribute("role", "tablist");
+    list.setAttribute("aria-orientation", "vertical");
+
+    var tabs = [], bodies = [], figs = [];
+    items.forEach(function (item, i) {
+      var head = item.querySelector(".features__t");
+      var body = item.querySelector(".features__b");
+      var fig  = item.querySelector(".features__fig");
+
+      // The heading's content moves into a button that takes its place; the
+      // tablist must own its tabs, so the list item becomes presentational.
+      var tab = document.createElement("button");
+      tab.type = "button";
+      tab.className = "features__tab";
+      tab.id = "feature-tab-" + (i + 1);
+      tab.setAttribute("role", "tab");
+      tab.setAttribute("aria-controls", "feature-panel-" + (i + 1));
+      while (head.firstChild) tab.appendChild(head.firstChild);
+      item.replaceChild(tab, head);
+      item.setAttribute("role", "presentation");
+
+      fig.id = "feature-panel-" + (i + 1);
+      fig.setAttribute("role", "tabpanel");
+      fig.setAttribute("aria-labelledby", tab.id);
+      stage.appendChild(fig);
+
+      tabs.push(tab); bodies.push(body); figs.push(fig);
+    });
+
+    root.insertBefore(menu, list);
+    menu.appendChild(list);
+    ctrl.appendChild(pause);
+    menu.appendChild(ctrl);
+    root.appendChild(stage);
+    root.classList.add("features--on");
+
+    var current = 0;
+    var video = stage.querySelector("[data-features-video]");
+    if (video) {
+      // The autoplay attribute is for a visitor without this script; with it,
+      // playback is ours, and a hidden panel's clip must not decode unseen.
+      video.removeAttribute("autoplay");
+      video.addEventListener("play", function () { syncVideo(); });
+    }
+
+    function select(i, focus) {
+      current = (i + tabs.length) % tabs.length;
+      tabs.forEach(function (t, n) {
+        var on = n === current;
+        t.setAttribute("aria-selected", on ? "true" : "false");
+        t.tabIndex = on ? 0 : -1;
+        bodies[n].hidden = !on;
+        figs[n].setAttribute("aria-hidden", on ? "false" : "true");
+      });
+      if (focus) tabs[current].focus();
+      syncVideo();
+    }
+
+    /* Autoplay state. `stopped` is the visitor's choice (the pill, or picking
+       a feature) and outlasts hover and focus; hover, focus and visibility are
+       momentary. `pilled` is only the pill: picking the 3D feature should play
+       its clip, but a visitor who pressed pause has asked for nothing to move. */
+    var stopped = reduced.matches;
+    var pilled = reduced.matches;
+    var hovered = false, focused = false, onScreen = true;
+    var timer = null;
+
+    function running() { return !stopped && !hovered && !focused && onScreen && !document.hidden; }
+
+    function syncVideo() {
+      if (!video) return;
+      var shouldPlay = !pilled && !reduced.matches && onScreen && !document.hidden && figs[current].contains(video);
+      if (shouldPlay && video.paused) {
+        if (video.preload === "none") video.preload = "metadata";
+        var p = video.play();
+        if (p && p.catch) p.catch(function () {});
+      } else if (!shouldPlay && !video.paused) {
+        video.pause();
+      }
+    }
+
+    function sync() {
+      if (running() && !timer) {
+        timer = setInterval(function () { select(current + 1, false); }, 6000);
+      } else if (!running() && timer) {
+        clearInterval(timer); timer = null;
+      }
+      pause.textContent = stopped ? "▶ PLAY" : "❚❚ PAUSE";
+      pause.setAttribute("aria-label", stopped ? "Play the feature tour" : "Pause the feature tour");
+      syncVideo();
+    }
+
+    tabs.forEach(function (t, n) {
+      t.addEventListener("click", function () {
+        stopped = true;
+        select(n, false);
+        sync();
+      });
+      t.addEventListener("keydown", function (e) {
+        var to = null;
+        if (e.key === "ArrowDown" || e.key === "ArrowRight") to = current + 1;
+        else if (e.key === "ArrowUp" || e.key === "ArrowLeft") to = current - 1;
+        else if (e.key === "Home") to = 0;
+        else if (e.key === "End") to = tabs.length - 1;
+        if (to === null) return;
+        e.preventDefault();
+        stopped = true;
+        select(to, true);
+        sync();
+      });
+    });
+
+    pause.addEventListener("click", function () {
+      stopped = !stopped;
+      pilled = stopped;
+      // Leaving focus on the pill would otherwise hold the tour paused.
+      if (!stopped) { focused = false; }
+      sync();
+    });
+
+    root.addEventListener("mouseenter", function () { hovered = true; sync(); });
+    root.addEventListener("mouseleave", function () { hovered = false; sync(); });
+    root.addEventListener("focusin", function (e) { if (e.target !== pause) { focused = true; sync(); } });
+    root.addEventListener("focusout", function (e) {
+      if (!root.contains(e.relatedTarget)) { focused = false; sync(); }
+    });
+    document.addEventListener("visibilitychange", sync);
+    if (canObserve) {
+      new IntersectionObserver(function (entries) {
+        onScreen = entries[0].isIntersecting;
+        sync();
+      }, { threshold: 0.25 }).observe(root);
+    }
+    reduced.addEventListener("change", function (e) {
+      if (e.matches) stopped = pilled = true;
+      sync();
+    });
+
+    select(0, false);
+    sync();
+  }
+
+  /* --------------------------------------------------------------------
      FAQ accordion — one open at a time, opacity only (§07).
      -------------------------------------------------------------------- */
   function initFaq() {
@@ -448,6 +621,7 @@
     initAuthNav();
     initVideo();
     initCarousel();
+    initFeatures();
     initFaq();
     initReveal();
     initProgress();

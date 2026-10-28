@@ -204,43 +204,94 @@
     </div>
   </section>
 
-  <!-- 4 · The online classroom --------------------------------------------- -->
+  <!-- 4 · The online classroom ---------------------------------------------
+       Six features, each with its own capture from the platform. Without the
+       script this reads as a plain list, each item with its picture under it
+       (§13: no content depends on motion); site.js turns it into a menu on
+       the left and one stage on the right that steps through them. -->
   <section class="section section--cream section--ruled" id="online">
     <div class="wrap stack-32">
       <div class="sec-head rv">
         <div class="eyebrow">MODULES M1–M6 · THE ONLINE CLASSROOM</div>
-        <h2>See what's under the needle.</h2>
-        <p class="lede">Treatment video pauses at key moments to ask what you'd do next, while a 3D model of the face shows the structures in view.</p>
+        <h2>Most training platforms just play videos.</h2>
+        <p class="lede">Prentice1 stops to teach. Every lesson pauses at the moments that matter, asks what you'd do next, and shows you the anatomy underneath.</p>
       </div>
-      <div class="classroom">
-        <figure class="classroom__fig unveil">
-          <div class="frame frame--square">
-            <video data-bgv autoplay muted loop playsinline preload="metadata"
-                   poster="/assets/img/screenshare-poster.jpg"
-                   aria-label="Screen recording of the Prentice1 lesson player: treatment video beside the 3D anatomy model, with the Lesson Coach below">
-              <source src="/assets/video/screenshare.webm" type="video/webm">
-              <source src="/assets/video/screenshare.mp4" type="video/mp4">
-            </video>
-          </div>
-          <figcaption>The Prentice1 lesson player, recorded in the platform.</figcaption>
-        </figure>
-        <div class="hairline-list rv">
-          <div class="hairline-list__item">
-            <div class="hairline-list__t">Peel the face in 3D</div>
-            <div class="hairline-list__b">Turn layers on and off from skin to bone. Tap a structure for its depth and injection notes.</div>
-          </div>
-          <div class="hairline-list__item">
-            <div class="hairline-list__t">Video that stops to teach</div>
-            <div class="hairline-list__b">Expert narration, with questions at the moments that matter.</div>
-          </div>
-          <div class="hairline-list__item">
-            <div class="hairline-list__t">A check after every lesson</div>
-            <div class="hairline-list__b">Answers explained and linked back to the exact moment in the video.</div>
-          </div>
-          <!-- CC BY-SA 4.0 requires this credit. Do not remove. -->
-          <p class="credit">3D model: Z-Anatomy (CC BY-SA 4.0), derived from BodyParts3D.</p>
-        </div>
+      <div class="features rv" data-features>
+        <ol class="features__list" aria-label="What the online classroom does">
+          <li class="features__item">
+            <h3 class="features__t"><span class="features__n">01</span>Video that stops to teach</h3>
+            <p class="features__b">The lesson holds the frame at the moments that matter and asks what you'd do next. A required stop has to be answered before you move on.</p>
+            <figure class="features__fig">
+              <div class="features__frame">
+                <img src="/assets/img/classroom/stop.jpg" width="1166" height="725" loading="lazy" decoding="async"
+                     alt="A cheek filler lesson held at a required stop: the frame is dimmed and a question asks which anatomical components the presenter named, with five options">
+              </div>
+              <figcaption>A required stop in a cheek filler lesson.</figcaption>
+            </figure>
+          </li>
+          <li class="features__item">
+            <h3 class="features__t"><span class="features__n">02</span>Every answer explained</h3>
+            <p class="features__b">Right or wrong, every option tells you why, and Rewatch takes you back to the exact seconds that answer it.</p>
+            <figure class="features__fig">
+              <div class="features__frame">
+                <img src="/assets/img/classroom/answer.jpg" width="1166" height="725" loading="lazy" decoding="async"
+                     alt="The answer to the stop: Not quite, with a reason under each option and a Rewatch 0:15 to 0:49 button">
+              </div>
+              <figcaption>Each option carries its own reason, with the replay range beside it.</figcaption>
+            </figure>
+          </li>
+          <li class="features__item">
+            <h3 class="features__t"><span class="features__n">03</span>Peel the face in 3D</h3>
+            <p class="features__b">Turn the model, peel it from skin to bone, and tap any structure for its notes.</p>
+            <figure class="features__fig">
+              <div class="features__frame features__frame--model">
+                <video data-features-video autoplay muted loop playsinline preload="none"
+                       poster="/assets/img/classroom-anatomy-poster.jpg"
+                       aria-label="Screen recording of the 3D anatomy trainer: the head turns, the layers are peeled back to bone, then the orbicularis oculi and procerus are selected">
+                  <source src="/assets/video/classroom-anatomy.webm" type="video/webm">
+                  <source src="/assets/video/classroom-anatomy.mp4" type="video/mp4">
+                </video>
+              </div>
+              <figcaption>The 3D anatomy trainer, recorded in the platform.</figcaption>
+            </figure>
+          </li>
+          <li class="features__item">
+            <h3 class="features__t"><span class="features__n">04</span>A coach that cites the moment</h3>
+            <p class="features__b">Ask about what you're watching. The Lesson Coach answers only from the lesson, links the second it was said, and sends what it can't answer to faculty.</p>
+            <figure class="features__fig">
+              <div class="features__frame features__frame--light">
+                <img src="/assets/img/classroom/coach.jpg" width="1164" height="653" loading="lazy" decoding="async"
+                     alt="The Lesson Coach answering what sequence the presenter plans, tagged Presenter stated, with a link to watch the lesson at 0:35">
+              </div>
+              <figcaption>An answer from the lesson, with the moment it comes from.</figcaption>
+            </figure>
+          </li>
+          <li class="features__item">
+            <h3 class="features__t"><span class="features__n">05</span>Search every moment</h3>
+            <p class="features__b">Find a phrase, a structure or a product across your lessons and open the video at the second it comes up.</p>
+            <figure class="features__fig">
+              <div class="features__frame">
+                <img src="/assets/img/classroom/search.jpg" width="1208" height="755" loading="lazy" decoding="async"
+                     alt="Library Search for fat pads: timestamped results from the cheek filler lesson with the words highlighted">
+              </div>
+              <figcaption>Library Search, with a timestamp on every result.</figcaption>
+            </figure>
+          </li>
+          <li class="features__item">
+            <h3 class="features__t"><span class="features__n">06</span>Laptop, iPad or phone</h3>
+            <p class="features__b">Your place, your answers and the stop you were on are saved, so you pick up on any device where you left off.</p>
+            <figure class="features__fig">
+              <div class="features__frame features__frame--light">
+                <img src="/assets/img/classroom/devices.jpg" width="1440" height="720" loading="lazy" decoding="async"
+                     alt="The same paused lesson on a laptop, an iPad and a phone">
+              </div>
+              <figcaption>The same lesson on a laptop, an iPad and a phone.</figcaption>
+            </figure>
+          </li>
+        </ol>
       </div>
+      <!-- CC BY-SA 4.0 requires this credit. Do not remove. -->
+      <p class="credit">3D model: Z-Anatomy (CC BY-SA 4.0), derived from BodyParts3D.</p>
     </div>
   </section>
 
