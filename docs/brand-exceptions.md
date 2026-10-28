@@ -116,8 +116,9 @@ the README, which is the stated order.
   platform instrument.
 - **The site said "5-minute application"; the questionnaire says about seven.**
   §1.2 principle 1 is explicitly about honest time estimates and withdraws an
-  earlier inflated claim. The hero, the final CTA and admission step 01 now say
-  seven minutes. Revisit if the Intake's scope changes.
+  earlier inflated claim. As of 2026-10-28, by the owner's decision, the site
+  states no duration at all: the hero says "Apply in minutes" and the
+  admission steps carry no times. Revisit if the Intake's scope changes.
 
 - **Three policy pages are still stubs.** `/terms`, `/refund` and
   `/accessibility` each say they are being written and point at
@@ -127,8 +128,9 @@ the README, which is the stated order.
   2026-10-16 audit called a missing refund policy enough on its own to stop a
   qualified applicant at a $15,000 decision — and they are owner and counsel
   work, not copy. The homepage FAQ no longer shows a bracketed placeholder in
-  their place; it states that the deposit is refundable, that the full terms
-  land before applications close, and how to get them sooner.
+  their place; it states that the $1,000 deposit is non-refundable (owner,
+  2026-10-28), that the full terms land before applications close, and how
+  to get them sooner.
 
 - **The intensive's location.** The curriculum says California; this site says
   Los Angeles in its title, canonical URL, OG images and schema. As of

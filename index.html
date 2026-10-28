@@ -53,13 +53,10 @@
       "provider": { "@id": "https://prentice1.com/#org" },
       "url": "https://prentice1.com/",
       "educationalCredentialAwarded": "The Prentice1 Readiness Standard, a practice-readiness signal. No certification or licensure is awarded. Scope of practice depends on your license and state.",
-      "offers": {
-        "@type": "Offer",
-        "price": "15000",
-        "priceCurrency": "USD",
-        "category": "Tuition",
-        "url": "https://prentice1.com/apply/"
-      },
+      "offers": [
+        { "@type": "Offer", "name": "Prentice1 Foundations", "price": "4995", "priceCurrency": "USD", "category": "Tuition", "url": "https://prentice1.com/apply/" },
+        { "@type": "Offer", "name": "Prentice1 Academy", "price": "14995", "priceCurrency": "USD", "category": "Tuition", "url": "https://prentice1.com/apply/" }
+      ],
       "hasCourseInstance": {
         "@type": "CourseInstance",
         "courseMode": "blended",
@@ -76,7 +73,8 @@
         { "@type": "Question", "name": "How many hours a week does it take?", "acceptedAnswer": { "@type": "Answer", "text": "Plan for 12 to 18 hours a week across the six online modules, in blocks you protect. A lesson counts when you are watching and answering, so background playback does not count." } },
         { "@type": "Question", "name": "Is a job guaranteed?", "acceptedAnswer": { "@type": "Answer", "text": "No. Prentice Day is designed to put you in front of practices matched to your profile, but Prentice1 does not guarantee employment and is not a certifying body." } },
         { "@type": "Question", "name": "What do I finish with?", "acceptedAnswer": { "@type": "Answer", "text": "The Prentice1 Readiness Standard: a record of what you were taught and what faculty observed you do, written to be read by a practice. It is a trust signal, not a certification and not a license." } },
-        { "@type": "Question", "name": "What does tuition include?", "acceptedAnswer": { "@type": "Answer", "text": "Six online modules with 3D anatomy, the weekly live sessions, the Foundations Exam and oral review, the five-day intensive in California, the cadaver lab, industry-grade product, the Module 6 small-group sessions, matching, Prentice Day and 90 days of support in your first role. Travel, lodging and state license fees are not included." } },
+        { "@type": "Question", "name": "What does tuition include?", "acceptedAnswer": { "@type": "Answer", "text": "Foundations ($4,995) is the six-week digital curriculum with 3D anatomy, live instruction every week, knowledge assessments including the Foundations Exam, and career preparation. Academy ($14,995) adds the cadaver lab, the five-day intensive in California with supervised injection on industry-grade product, the oral review and clearance, the Readiness Standard, small-group career coaching, Prentice Day, matching and 90 days of support in your first role. Travel, lodging and state license fees are not included in either." } },
+        { "@type": "Question", "name": "Will my Foundations tuition count toward Academy if I upgrade?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, if you upgrade within the same cohort. Your full $4,995 Foundations tuition is credited toward your Academy upgrade; the credit does not carry over to a later cohort. The upgrade fee is $10,995, bringing your total investment to $15,990. Candidates who enroll directly in Academy pay $14,995, saving $995 compared with the two-step pathway. Upgrades are subject to admissions approval, clinical eligibility, program requirements and seat availability." } },
         { "@type": "Question", "name": "Can I pay over time?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, through Cherry. Checking your rate is a soft credit check and won't affect your credit score. Financing is subject to approval." } }
       ]
     }
@@ -142,13 +140,13 @@
           <a class="btn btn--gold" href="/apply/">Apply for Cohort 1</a>
           <a class="btn btn--outline" href="#tuition">See tuition and schedule</a>
         </div>
-        <p class="hero__micro">7-minute application. No payment until you're accepted.</p>
+        <p class="hero__micro">Apply in minutes. No payment until you're accepted.</p>
       </div>
     </div>
 
     <div class="factbar-wrap">
       <dl class="factbar">
-        <div class="factbar__item"><dt>TUITION</dt><dd>$15,000 · monthly plans via Cherry</dd></div>
+        <div class="factbar__item"><dt>TUITION</dt><dd>Starting at $4,995</dd></div>
         <div class="factbar__item"><dt>SEATS</dt><dd>20, by application</dd></div>
         <div class="factbar__item"><dt>COMMITMENT</dt><dd>12–18 hours a week online</dd></div>
         <div class="factbar__item"><dt>OPEN TO</dt><dd>RN · NP · PA-C · MD</dd></div>
@@ -405,45 +403,97 @@
   </section>
 
   <!-- 8 · Tuition and admissions ------------------------------------------- -->
+  <!-- Two pathways (pricing update, 2026-10-28). Foundations comes first in the
+       source so the first price a visitor meets is the $4,995 entry point;
+       Academy carries the recommendation because it is the complete program
+       and the cheaper route to it. -->
   <section class="section section--cream section--top-rule" id="tuition">
-    <div class="wrap tuition">
-      <div class="tuition__left rv">
-        <div class="eyebrow">TUITION</div>
-        <div class="price">$15,000</div>
-        <p class="tuition__fin">Pay in full or monthly through Cherry. Checking your rate won't affect your credit score. Financing is subject to approval.</p>
-        <div class="tuition__lists">
-          <div>
-            <div class="tuition__lt">Included</div>
-            <ul class="ticks">
-              <li><span class="tick">✓</span><span>Six online modules with 3D anatomy</span></li>
-              <li><span class="tick">✓</span><span>A live faculty session every week</span></li>
-              <li><span class="tick">✓</span><span>Foundations Exam and oral review</span></li>
-              <li><span class="tick">✓</span><span>Five-day intensive in California</span></li>
-              <li><span class="tick">✓</span><span>Hands-on cadaver lab</span></li>
-              <li><span class="tick">✓</span><span>Industry-grade toxins and fillers</span></li>
-              <li><span class="tick">✓</span><span>Matching and Prentice Day</span></li>
-              <li><span class="tick">✓</span><span>90 days of support in your first role</span></li>
-            </ul>
+    <div class="wrap stack-36">
+      <div class="sec-head rv">
+        <div class="eyebrow">TUITION · STARTING AT $4,995</div>
+        <h2>Two ways to begin. One complete experience.</h2>
+        <p class="lede">Choose the pathway that fits where you are today. Both come with payment plans and financing: pay in full, or monthly through Cherry. Checking your rate won't affect your credit score. Financing is subject to approval.</p>
+      </div>
+
+      <div class="tiers plans">
+        <div class="tier plan rv">
+          <div class="tier__head">
+            <span class="eyebrow">PRENTICE1 FOUNDATIONS</span>
+            <span class="plan__from">Starting at</span>
+            <span class="tier__price">$4,995</span>
+            <span class="plan__fin">Payment plans and financing available</span>
+            <span class="tier__slots">Six weeks · online</span>
           </div>
-          <div>
-            <div class="tuition__lt">Not included</div>
-            <ul class="ticks ticks--muted">
-              <li><span class="tick">–</span><span>Travel and lodging in Los Angeles</span></li>
-              <li><span class="tick">–</span><span>State license fees</span></li>
-            </ul>
-            <a class="tuition__policy" href="/refund/">Refund and deferral policy</a>
+          <p class="plan__desc">Build your foundational knowledge through six weeks of expert-led digital education. Start exploring medical aesthetics without committing to the full clinical training experience.</p>
+          <!-- Gating rule (owner, 2026-10-28): Foundations keeps everything that
+               teaches the knowledge; Academy adds what needs a body in the room,
+               one-to-one faculty time or a capped seat. -->
+          <ul class="ticks tier__list">
+            <li><span class="tick">✓</span><span>Six-week digital curriculum with 3D anatomy</span></li>
+            <li><span class="tick">✓</span><span>Live instruction with faculty every week</span></li>
+            <li><span class="tick">✓</span><span>Knowledge assessments, including the Foundations Exam</span></li>
+            <li><span class="tick">✓</span><span>Career preparation: the practice and business module</span></li>
+            <li><span class="tick">✓</span><span>Full credit toward Academy if you upgrade within your cohort</span></li>
+          </ul>
+          <ul class="ticks ticks--muted tier__list">
+            <li><span class="tick">–</span><span>Cadaver lab and the hands-on intensive</span></li>
+            <li><span class="tick">–</span><span>Readiness Standard, Prentice Day and matching</span></li>
+          </ul>
+          <a class="btn btn--outline-ink tier__cta" href="/apply/">Apply for Foundations</a>
+        </div>
+
+        <div class="tier tier--feature plan plan--rec rv">
+          <div class="plan__flag">Recommended · Best value</div>
+          <div class="tier__head">
+            <span class="eyebrow eyebrow--on-dark">PRENTICE1 ACADEMY</span>
+            <span class="plan__from">The complete program</span>
+            <span class="tier__price">$14,995</span>
+            <span class="plan__fin">Payment plans and financing available</span>
+            <span class="tier__slots">Jan 18 – Mar 13, 2027 · online, then hands-on in California</span>
           </div>
+          <p class="plan__desc">Our best-value pathway for candidates ready to commit to the complete experience.</p>
+          <ul class="ticks tier__list">
+            <li><span class="tick">✓</span><span>Everything in Foundations, plus:</span></li>
+            <li><span class="tick">✓</span><span>Hands-on cadaver anatomy lab</span></li>
+            <li><span class="tick">✓</span><span>Five-day intensive in California: supervised injection with industry-grade toxins and fillers, patient consults and complication drills</span></li>
+            <li><span class="tick">✓</span><span>Oral review and clearance for live-face training</span></li>
+            <li><span class="tick">✓</span><span>The Prentice1 Readiness Standard</span></li>
+            <li><span class="tick">✓</span><span>Small-group career coaching and a one-to-one advisor session</span></li>
+            <li><span class="tick">✓</span><span>Prentice Day and ongoing matching support</span></li>
+            <li><span class="tick">✓</span><span>90 days of support in your first role</span></li>
+          </ul>
+          <a class="btn btn--gold tier__cta" href="/apply/">Apply for Academy</a>
         </div>
       </div>
 
-      <div class="panel-dark rv" id="apply">
+      <div class="upgrade rv">
+        <div class="upgrade__copy">
+          <div class="eyebrow">THE TWO-STEP PATH</div>
+          <h3>Start with Foundations. Upgrade when you're ready.</h3>
+          <p>If you're not ready to commit to Academy today, you can begin with Foundations and apply to upgrade later. Your full $4,995 is credited toward the upgrade.</p>
+          <!-- Credit is valid only within the learner's own cohort (owner, 2026-10-28). -->
+          <p class="upgrade__fine">Academy upgrades are subject to admissions approval, clinical eligibility, program requirements and seat availability. Foundations credit is valid only toward an upgrade within the same cohort; it does not carry over to a later cohort.</p>
+        </div>
+        <dl class="ledger">
+          <div><dt>Foundations enrollment</dt><dd>$4,995</dd></div>
+          <div><dt>Academy upgrade</dt><dd>$10,995</dd></div>
+          <div class="ledger__total"><dt>Total, two steps</dt><dd>$15,990</dd></div>
+          <div><dt>Enroll directly in Academy</dt><dd>$14,995</dd></div>
+          <div class="ledger__save"><dt>You save by enrolling directly</dt><dd>$995</dd></div>
+        </dl>
+        <div class="upgrade__foot">
+          <p><b>Not included in either pathway:</b> travel and lodging in Los Angeles, and state license fees.</p>
+          <a href="/refund/">Refund and deferral policy</a>
+        </div>
+      </div>
+
+      <div class="panel-dark panel-dark--wide rv" id="apply">
         <div class="eyebrow eyebrow--on-dark">HOW ADMISSION WORKS</div>
         <ol class="steps">
-          <li><span class="steps__n">01</span><span class="steps__b"><span class="steps__t">Career Map call</span><span class="steps__d">Thirty minutes with an advisor before you apply: what your license allows, demand in your market, what a first role actually pays, and the time and money this takes.</span></span></li>
-          <li><span class="steps__n">02</span><span class="steps__b"><span class="steps__t">Apply</span><span class="steps__d">About seven minutes in one sitting: license, state, experience and goals. Your answers save as you go, so nothing is lost if you stop.</span></span></li>
-          <li><span class="steps__n">03</span><span class="steps__b"><span class="steps__t">Full application and interview</span><span class="steps__d">We verify your license, then send a longer application — about 30 to 45 minutes on practice history, prior training and preferences — and invite shortlisted applicants to a recorded interview with a panel.</span></span></li>
-          <li><span class="steps__n">04</span><span class="steps__b"><span class="steps__t">Offer</span><span class="steps__d">A decision within 5 business days of the interview, with tuition and financing terms. Your offer is held for 7 days.</span></span></li>
-          <li><span class="steps__n">05</span><span class="steps__b"><span class="steps__t">Reserve your seat</span><span class="steps__d">A $1,000 refundable deposit holds your seat. Pay the balance or start a Cherry plan, then your pre-cohort work opens on January 3.</span></span></li>
+          <li><span class="steps__n">01</span><span class="steps__b"><span class="steps__t">Submit your interest</span><span class="steps__d">Tell us your license, state, experience and goals. We verify your license before anything else.</span></span></li>
+          <li><span class="steps__n">02</span><span class="steps__b"><span class="steps__t">Complete the full application</span><span class="steps__d">Once your credentials are verified, we send the full application on practice history, prior training and preferences, and invite shortlisted applicants to an interview with a panel.</span></span></li>
+          <li><span class="steps__n">03</span><span class="steps__b"><span class="steps__t">Offer</span><span class="steps__d">A decision after your interview, with tuition and financing terms for your pathway.</span></span></li>
+          <li><span class="steps__n">04</span><span class="steps__b"><span class="steps__t">Reserve your seat</span><span class="steps__d">A $1,000 non-refundable deposit holds your seat. Pay the balance or start a Cherry plan, then your pre-cohort work opens on January 3.</span></span></li>
         </ol>
         <a class="btn btn--gold panel-dark__cta" href="/apply/">Apply for Cohort 1</a>
       </div>
@@ -500,7 +550,15 @@
             <span>What does tuition include?</span><span class="faq__sign" aria-hidden="true"></span>
           </button>
           <div class="faq__a" id="faq-a4" role="region" aria-labelledby="faq-q4" hidden>
-            <p>Six online modules with 3D anatomy, the weekly live sessions, the Foundations Exam and oral review, the five-day intensive in California, the cadaver lab, industry-grade product, the Module 6 small-group sessions, matching, Prentice Day and 90 days of support in your first role. Travel, lodging and state license fees are not included.</p>
+            <p>Foundations ($4,995) is the six-week digital curriculum with 3D anatomy, live instruction every week, knowledge assessments including the Foundations Exam, and career preparation. Academy ($14,995) adds the cadaver lab, the five-day intensive in California with supervised injection on industry-grade product, the oral review and clearance, the Readiness Standard, small-group career coaching, Prentice Day, matching and 90 days of support in your first role. Travel, lodging and state license fees are not included in either.</p>
+          </div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__q" data-faq-q type="button" aria-expanded="false" aria-controls="faq-a9" id="faq-q9">
+            <span>Will my Foundations tuition count toward Academy if I upgrade?</span><span class="faq__sign" aria-hidden="true"></span>
+          </button>
+          <div class="faq__a" id="faq-a9" role="region" aria-labelledby="faq-q9" hidden>
+            <p>Yes, if you upgrade within the same cohort. Your full $4,995 Foundations tuition is credited toward your Academy upgrade; the credit does not carry over to a later cohort. The upgrade fee is $10,995, bringing your total investment to $15,990. Candidates who enroll directly in Academy pay $14,995, saving $995 compared with the two-step pathway — the pricing rewards early commitment while keeping the flexibility to begin with Foundations. Upgrades are subject to admissions approval, clinical eligibility, program requirements and seat availability.</p>
           </div>
         </div>
         <div class="faq__item">
@@ -516,7 +574,7 @@
             <span>What if I need to withdraw or defer?</span><span class="faq__sign" aria-hidden="true"></span>
           </button>
           <div class="faq__a" id="faq-a6" role="region" aria-labelledby="faq-q6" hidden>
-            <p>Your $1,000 deposit is refundable. The full refund and deferral terms are being finalized and will be published here before applications close on December 23, 2026 — if you need them before you decide, email <a href="mailto:hello@prentice1.com">hello@prentice1.com</a> and we will send them to you directly.</p>
+            <p>The $1,000 deposit that holds your seat is non-refundable. The full refund and deferral terms for the rest of your tuition are being finalized and will be published here before applications close on December 23, 2026 — if you need them before you decide, email <a href="mailto:hello@prentice1.com">hello@prentice1.com</a> and we will send them to you directly.</p>
           </div>
         </div>
       </div>
