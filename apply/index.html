@@ -5,20 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#14110F">
 
-<title>Apply for Cohort 1 · Prentice1</title>
-<meta name="description" content="Start your application for Prentice1 Cohort 1, January 18 – March 13, 2027. Applications close December 23, 2026. No payment until you're accepted.">
+<title>Apply · Prentice1</title>
+<meta name="description" content="Apply for Prentice1 Cohort 1, January 18 – March 13, 2027, or for a future cohort. Cohort 1 applications close December 23, 2026. No payment until you're accepted.">
 <link rel="canonical" href="https://prentice1.com/apply/">
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://prentice1.com/apply/">
 <meta property="og:site_name" content="Prentice1">
-<meta property="og:title" content="Apply for Cohort 1 · Prentice1">
+<meta property="og:title" content="Apply · Prentice1">
 <meta property="og:description" content="Twenty seats, by application. Cohort 1, Los Angeles. No payment until you're accepted.">
 <meta property="og:image" content="https://prentice1.com/assets/og/home.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Apply for Cohort 1 · Prentice1">
+<meta name="twitter:title" content="Apply · Prentice1">
 <meta name="twitter:description" content="Twenty seats, by application. Cohort 1, Los Angeles. No payment until you're accepted.">
 <meta name="twitter:image" content="https://prentice1.com/assets/og/home.jpg">
 
@@ -58,18 +58,33 @@
 
     <div class="apply__head">
       <div class="eyebrow">COHORT 1 · JAN 18 – MAR 13, 2027</div>
-      <h1>Apply for Cohort 1.</h1>
-      <p class="lede">Twenty seats, by application. Everything we need to start is on this page — one sitting, no follow-up form to wait for. Applications close December 23, 2026.</p>
+      <h1>Apply to Prentice1.</h1>
+      <p class="lede">Twenty seats in Cohort 1, by application, closing December 23, 2026. If January is too soon, apply now for a future cohort and we'll contact you as soon as its dates are set. Everything we need to start is on this page.</p>
       <p class="apply__micro">Not sure yet? Start with the <a href="/#faq">frequently asked questions</a>: who is eligible, the weekly time commitment, what each pathway includes and how financing works.</p>
     </div>
 
     <dl class="apply__facts">
       <div><dt>TUITION</dt><dd>Starting at $4,995</dd></div>
       <div><dt>OPEN TO</dt><dd>RN · NP · PA-C · MD</dd></div>
-      <div><dt>APPLY BY</dt><dd>December 23, 2026</dd></div>
+      <div><dt>COHORT 1 CLOSES</dt><dd>December 23, 2026</dd></div>
     </dl>
 
     <form class="apply__form" id="applyForm" novalidate>
+      <!-- Cohort choice (owner, 2026-10-29). ?cohort=future preselects the
+           second option for links from "Apply for a future cohort". -->
+      <fieldset class="field choice" aria-describedby="cohort-msg">
+        <legend>When would you like to start?</legend>
+        <label class="choice__opt">
+          <input type="radio" name="cohort" value="cohort-1" required>
+          <span><b>Cohort 1</b><span class="choice__sub">January 18 – March 13, 2027</span></span>
+        </label>
+        <label class="choice__opt">
+          <input type="radio" name="cohort" value="future">
+          <span><b>A future cohort</b><span class="choice__sub">Dates to be announced. We'll contact you when they're set.</span></span>
+        </label>
+        <p class="field__msg" id="cohort-msg" role="alert"></p>
+      </fieldset>
+
       <div class="field">
         <label for="name">Full name</label>
         <input type="text" id="name" name="name" autocomplete="name" required aria-describedby="name-msg">
@@ -125,7 +140,7 @@
       </div>
 
       <div class="field">
-        <label for="goals">What do you want from Cohort 1? <span class="field__opt">optional</span></label>
+        <label for="goals">What do you want from Prentice1? <span class="field__opt">optional</span></label>
         <textarea id="goals" name="goals" rows="4" maxlength="600" aria-describedby="goals-hint"></textarea>
         <p class="field__hint" id="goals-hint">A couple of sentences is plenty.</p>
       </div>

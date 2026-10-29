@@ -52,6 +52,14 @@
     var ok = true;
     var first = null;
 
+    if (!values.cohort) {
+      setMsg("cohort", "Choose Cohort 1 or a future cohort.");
+      first = first || form.querySelector('input[name="cohort"]');
+      ok = false;
+    } else {
+      setMsg("cohort", "");
+    }
+
     if (!values.name) {
       setMsg("name", "Enter your full name.");
       first = first || document.getElementById("name");
@@ -89,8 +97,9 @@
      a plain email thread is outside every control that applies to it, so it
      is left out and asked for again on the call. */
   function fallbackLink(values) {
-    var subject = "Application — Prentice1 Cohort 1";
+    var subject = "Application — Prentice1 " + cohortLabel(values.cohort);
     var body =
+      "Starting: " + cohortLabel(values.cohort) + "\n" +
       "Name: " + values.name + "\n" +
       "Email: " + values.email + "\n" +
       "License: " + values.licence + "\n" +
@@ -99,6 +108,19 @@
       (values.goals ? "Goals: " + values.goals + "\n" : "");
     return MAILTO + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
   }
+
+  function cohortLabel(v) {
+    return v === "future" ? "future cohort" : "Cohort 1";
+  }
+
+  /* Links from "Apply for a future cohort" arrive with ?cohort=future and
+     land with that option already chosen; the applicant can still change it. */
+  (function preselectCohort() {
+    var m = /[?&]cohort=([^&]+)/.exec(window.location.search);
+    if (!m) return;
+    var radio = form.querySelector('input[name="cohort"][value="' + decodeURIComponent(m[1]).replace(/"/g, "") + '"]');
+    if (radio) radio.checked = true;
+  })();
 
   /* 50 states, DC and PR, matching A-14's allowed set. */
   var STATES = ("Alabama,Alaska,Arizona,Arkansas,California,Colorado,Connecticut,Delaware," +
@@ -123,7 +145,12 @@
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
+    var checked = form.querySelector('input[name="cohort"]:checked');
     var values = {
+      // TODO: confirm the applications API accepts `cohort` ("cohort-1" or
+      // "future") before this ships; a server that rejects unknown fields would
+      // send every applicant to the email fallback.
+      cohort: checked ? checked.value : "",
       name: form.name.value.trim(),
       email: form.email.value.trim(),
       phone: form.phone.value.trim(),
@@ -163,7 +190,8 @@
            steps later — repeating the number here without that qualifier reads
            as five days from now, which nothing delivers. */
         say("ok", "<b>Thank you — we have your details.</b> We'll check your license and email " +
-          escapeHtml(values.email) + " with the full application.");
+          escapeHtml(values.email) + " with the full application" +
+          (values.cohort === "future" ? ", and let you know as soon as the next cohort's dates are set." : "."));
         submit.hidden = true;
       })
       .catch(function () {
