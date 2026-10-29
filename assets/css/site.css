@@ -555,25 +555,80 @@ p { margin: 0; }
 .phase-card--dark .go { color: var(--gold-light); }
 
 /* ============================================================================
-   Classroom
+   Online classroom
    ========================================================================= */
 
-.classroom { display: flex; flex-wrap: wrap; gap: clamp(28px, 4vw, 56px); align-items: center; justify-content: center; }
-.classroom__fig { margin: 0; flex: 1.3 1 460px; min-width: 0; max-width: 640px; display: flex; flex-direction: column; gap: var(--s-3); }
-.classroom__fig figcaption,
+/* The feature tour. Read as a plain list by default: each item's title,
+   sentence and picture in order. site.js adds .features--on, moves every
+   figure into one stage beside the list, and steps through them (§13: the
+   enhanced layout only exists once the script has run). */
+.features__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; border-top: 1px solid var(--charcoal); }
+.features__item { padding: 18px 0 22px; border-bottom: 1px solid var(--rule); display: flex; flex-direction: column; gap: var(--s-2); }
+.features__t { display: flex; align-items: baseline; gap: var(--s-4); font-family: var(--sans); font-size: 17px; font-weight: 500; line-height: 1.35; color: var(--ink); }
+.features__n { font-family: var(--mono); font-size: 11.5px; font-weight: 400; letter-spacing: 0.1em; color: var(--gold-deep); flex: none; width: 2.2em; }
+.features__b { font-size: 15px; line-height: 1.55; color: var(--ink-2); padding-left: calc(2.2em * 11.5 / 15 + var(--s-4)); max-width: 52ch; }
+.features__fig { margin: var(--s-3) 0 0; display: flex; flex-direction: column; gap: var(--s-3); min-width: 0; }
+.features__fig figcaption,
 .group-fig figcaption { font-size: 13px; color: var(--ink-2); }
+
+/* Every capture sits in the same 16:10 frame, so the stage never changes
+   height between features. Screens fill it from the top-left, where the
+   platform's own chrome is; the model and the light captures sit whole. */
+.features__frame { position: relative; aspect-ratio: 16 / 10; overflow: hidden; border-radius: var(--r-frame); border: 1px solid var(--rule); background: var(--charcoal); box-shadow: var(--shadow-media); }
+.features__frame img,
+.features__frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 0 0; }
+.features__frame--model { background: #121212; }
+.features__frame--model video { object-fit: contain; object-position: 50% 50%; }
+.features__frame--light { background: var(--cream); }
+.features__frame--light img { object-fit: contain; object-position: 50% 50%; padding: var(--s-6); }
+
+/* --- Enhanced: the menu on the left, one stage on the right ------------ */
+.features--on { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 8fr); gap: clamp(28px, 4vw, 56px); align-items: start; }
+.features--on .features__item { padding: 0; gap: 0; }
+.features--on .features__fig { margin: 0; }
+.features__tab {
+  all: unset; box-sizing: border-box; width: 100%; cursor: pointer;
+  display: flex; align-items: baseline; gap: var(--s-4); padding: 16px 0;
+  font-family: var(--sans); font-size: 17px; font-weight: 500; line-height: 1.35; color: var(--ink-2);
+  transition: color var(--t-fast) var(--ease);
+}
+.features__tab:hover,
+.features__tab[aria-selected="true"] { color: var(--ink); }
+.features__tab:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: var(--r-control); }
+/* The selected feature carries the scrub bar's stop marker: a gold diamond. */
+.features__tab .features__n { position: relative; }
+.features__tab[aria-selected="true"] .features__n::before {
+  content: ""; position: absolute; left: -16px; top: 50%; width: 7px; height: 7px;
+  background: var(--gold); transform: translateY(-50%) rotate(45deg);
+}
+.features--on .features__b { margin-top: -8px; padding-bottom: 18px; }
+.features--on .features__b[hidden] { display: none; }
+.features__stage { display: grid; min-width: 0; }
+.features__stage .features__fig { grid-area: 1 / 1; transition: opacity var(--t-base) var(--ease), visibility 0s linear var(--t-base); }
+.features__stage .features__fig[aria-hidden="true"] { opacity: 0; visibility: hidden; }
+.features__stage .features__fig[aria-hidden="false"] { opacity: 1; visibility: visible; transition-delay: 0s; }
+.features__ctrl { display: flex; justify-content: flex-start; padding-top: var(--s-6); }
+.features__pause {
+  display: inline-flex; align-items: center; gap: var(--s-2); cursor: pointer;
+  background: transparent; border: 1px solid var(--rule); border-radius: var(--r-pill);
+  padding: 7px var(--s-4); color: var(--ink-2);
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em;
+  transition: border-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+.features__pause:hover { border-color: var(--gold); color: var(--ink); }
+.features__pause:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.features ~ .credit { margin-top: calc(var(--s-5) - var(--s-9)); }
+
+/* Below 900px the stage leads and the menu follows it. */
+@media (max-width: 899px) {
+  .features--on { grid-template-columns: minmax(0, 1fr); gap: var(--s-8); }
+  .features--on .features__stage { order: -1; }
+}
 
 .frame { position: relative; width: 100%; overflow: hidden; background: var(--charcoal); box-shadow: var(--shadow-media); }
 .frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.frame--square { aspect-ratio: 1 / 1; border-radius: var(--r-frame); border: 1px solid var(--rule); }
-.frame--square video { object-position: 50% 50%; }
 .frame--16x9 { aspect-ratio: 16 / 9; border-radius: var(--r-card); background: var(--stage); }
 .frame--16x9 video { object-position: 40% 30%; }
-
-.hairline-list { flex: 1 1 340px; min-width: 0; max-width: 520px; display: flex; flex-direction: column; border-top: 1px solid var(--charcoal); }
-.hairline-list__item { padding: 18px 0; border-bottom: 1px solid var(--rule); }
-.hairline-list__t { font-size: 16px; font-weight: 500; color: var(--ink); }
-.hairline-list__b { margin-top: var(--s-1); font-size: 15px; line-height: 1.55; color: var(--ink-2); }
 
 /* ============================================================================
    Live week
