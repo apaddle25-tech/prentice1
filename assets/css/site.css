@@ -571,19 +571,22 @@ p { margin: 0; }
 .features__fig figcaption,
 .group-fig figcaption { font-size: 13px; color: var(--ink-2); }
 
-/* Every capture sits in the same 16:10 frame, so the stage never changes
-   height between features. Screens fill it from the top-left, where the
-   platform's own chrome is; the model and the light captures sit whole. */
-.features__frame { position: relative; aspect-ratio: 16 / 10; overflow: hidden; border-radius: var(--r-frame); border: 1px solid var(--rule); background: var(--charcoal); box-shadow: var(--shadow-media); }
+/* Every capture sits in the same 16:10 box, so the stage never changes height
+   between features. No border or shadow: each capture runs to the edge of
+   the box. Screens fill it from the top-left, where the platform's own chrome
+   is; the light captures sit straight on the section's cream. */
+.features__frame { position: relative; aspect-ratio: 16 / 10; overflow: hidden; border-radius: var(--r-frame); background: var(--charcoal); }
 .features__frame img,
 .features__frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 0 0; }
 .features__frame--model { background: #121212; }
-.features__frame--model video { object-fit: contain; object-position: 50% 50%; }
-.features__frame--light { background: var(--cream); }
-.features__frame--light img { object-fit: contain; object-position: 50% 50%; padding: var(--s-6); }
+.features__frame--model video { object-position: 50% 40%; }
+.features__frame--light { background: transparent; border-radius: 0; }
+.features__frame--light img { object-fit: contain; object-position: 50% 50%; }
 
 /* --- Enhanced: the menu on the left, one stage on the right ------------ */
-.features--on { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 8fr); gap: clamp(28px, 4vw, 56px); align-items: start; }
+/* The stage takes the larger share of the row, the captures being screens
+   with small type, while staying inside the page measure. */
+.features--on { display: grid; grid-template-columns: minmax(260px, 4.4fr) minmax(0, 8fr); gap: clamp(28px, 4vw, 56px); align-items: start; }
 .features--on .features__item { padding: 0; gap: 0; }
 .features--on .features__fig { margin: 0; }
 .features__tab {
@@ -627,18 +630,16 @@ p { margin: 0; }
 
 .frame { position: relative; width: 100%; overflow: hidden; background: var(--charcoal); box-shadow: var(--shadow-media); }
 .frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.frame--16x9 { aspect-ratio: 16 / 9; border-radius: var(--r-card); background: var(--stage); }
-.frame--16x9 video { object-position: 40% 30%; }
+/* Dr. Rivkin's assessment clip, full width in the intensive. 21:9 matches the
+   group photo it replaced there; 38% keeps both gloved hands and her face in. */
+.frame--wide { aspect-ratio: 21 / 9; border-radius: var(--r-card); background: var(--stage); }
+.frame--wide video { object-position: 50% 38%; }
+@media (max-width: 640px) { .frame--wide { aspect-ratio: 4 / 3; } }
 
 /* ============================================================================
    Live week
    ========================================================================= */
 
-.group-fig { margin: 0; display: flex; flex-direction: column; gap: var(--s-3); }
-.group-fig img {
-  width: 100%; height: auto; aspect-ratio: 21 / 9; object-fit: cover; object-position: center 22%;
-  border-radius: var(--r-card); box-shadow: var(--shadow-media);
-}
 .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 28px; }
 .feature { padding: var(--s-7) 0 0; border-top: 1px solid var(--charcoal); display: flex; flex-direction: column; gap: var(--s-2); }
 .feature h3 { font-family: var(--sans); font-size: 19px; font-weight: 500; color: var(--ink); }
@@ -721,6 +722,13 @@ p { margin: 0; }
    Who trains you
    ========================================================================= */
 
+/* The faculty group photo sits under Dr. Rivkin, before the faculty carousel. */
+.group-fig { margin: 0; display: flex; flex-direction: column; gap: var(--s-3); }
+.group-fig img {
+  width: 100%; height: auto; aspect-ratio: 21 / 9; object-fit: cover; object-position: center 22%;
+  border-radius: var(--r-card); box-shadow: var(--shadow-media);
+}
+
 .rivkin {
   display: flex; flex-wrap: wrap; gap: clamp(28px, 4vw, 56px); align-items: stretch;
   border-top: 2px solid var(--charcoal); padding-top: var(--s-9);
@@ -735,7 +743,6 @@ p { margin: 0; }
 .rivkin__lead { font-size: 17px; color: var(--ink); }
 .creds { list-style: none; margin: var(--s-2) 0 0; padding: 0; border-top: 1px solid var(--rule); }
 .creds li { padding: 11px 0; border-bottom: 1px solid var(--rule); font-size: 15.5px; }
-.rivkin__video { margin-top: var(--s-5); }
 
 .carousel { display: flex; flex-direction: column; gap: var(--s-6); margin-top: clamp(8px, 2vw, 24px); }
 .carousel__head { display: flex; justify-content: space-between; align-items: center; gap: var(--s-6); flex-wrap: wrap; }
