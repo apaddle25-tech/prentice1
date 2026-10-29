@@ -571,16 +571,17 @@ p { margin: 0; }
 .features__fig figcaption,
 .group-fig figcaption { font-size: 13px; color: var(--ink-2); }
 
-/* Every capture sits in the same 16:10 frame, so the stage never changes
-   height between features. Screens fill it from the top-left, where the
-   platform's own chrome is; the model and the light captures sit whole. */
-.features__frame { position: relative; aspect-ratio: 16 / 10; overflow: hidden; border-radius: var(--r-frame); border: 1px solid var(--rule); background: var(--charcoal); box-shadow: var(--shadow-media); }
+/* Every capture sits in the same 16:10 box, so the stage never changes height
+   between features. No border or shadow: each capture runs to the edge of
+   the box. Screens fill it from the top-left, where the platform's own chrome
+   is; the light captures sit straight on the section's cream. */
+.features__frame { position: relative; aspect-ratio: 16 / 10; overflow: hidden; border-radius: var(--r-frame); background: var(--charcoal); }
 .features__frame img,
 .features__frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 0 0; }
 .features__frame--model { background: #121212; }
-.features__frame--model video { object-fit: contain; object-position: 50% 50%; }
-.features__frame--light { background: var(--cream); }
-.features__frame--light img { object-fit: contain; object-position: 50% 50%; padding: var(--s-2); }
+.features__frame--model video { object-position: 50% 40%; }
+.features__frame--light { background: transparent; border-radius: 0; }
+.features__frame--light img { object-fit: contain; object-position: 50% 50%; }
 
 /* --- Enhanced: the menu on the left, one stage on the right ------------ */
 /* The stage takes most of the row: the captures are screens with small type,
