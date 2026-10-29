@@ -1,0 +1,10 @@
+# Kept out of Cloudflare preview uploads: repo plumbing and internal docs,
+# none of which is part of the site.
+.git
+.claude
+.assetsignore
+wrangler.jsonc
+CLAUDE.md
+CNAME
+docs
+tools

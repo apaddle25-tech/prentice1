@@ -826,20 +826,46 @@ p { margin: 0; }
    charcoal feature card with a gold flag naming it the recommendation; the
    flag text is charcoal on gold, never gold on cream. Gilda stays on the
    26px+ prices only — the ledger figures are DM Sans (§05). */
-.plans { grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: var(--s-8); }
+/* The two cards are one size and their rows line up across the pair: each
+   card is a subgrid spanning the parent's four rows (head, description,
+   lists, CTA), so the longer Foundations description cannot push its lists
+   out of line with Academy's. The recommendation flag sits outside the card,
+   rising above its top edge, so it marks Academy without shifting its
+   content down. .tiers.plans and .plans .plan outrank the .tier rules
+   declared further down. */
+.tiers.plans {
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--s-8);
+  padding-top: var(--flag-h);
+  --flag-h: 38px;
+}
+@media (min-width: 760px) {
+  .tiers.plans { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(4, auto); }
+  .plans .plan { display: grid; grid-template-rows: subgrid; grid-row: span 4; row-gap: var(--s-7); }
+  .plans .tier__cta { justify-self: start; align-self: end; }
+}
+/* Stacked on a phone, Academy needs room above it for its flag. */
+@media (max-width: 759.98px) {
+  .plans .plan--rec { margin-top: var(--flag-h); }
+}
+.plan__lists { display: flex; flex-direction: column; gap: var(--s-6); }
 .plan__from { font-size: 13px; color: var(--ink-2); margin-top: var(--s-1); }
 .plan__desc { font-size: 15px; line-height: 1.6; color: var(--ink-2); }
 /* Financing sits under each price, where the number lands, rather than in
    the hero fact bar, which it crowded. */
 .plan__fin { font-size: 14px; font-weight: 500; color: var(--gold-deep); }
 .plan--rec .plan__fin { color: var(--gold-light); }
-/* Doubled class: .tier (declared later) would otherwise restore the top padding. */
-.tier.plan--rec { border-color: var(--gold); padding-top: 0; }
+.plans .plan--rec {
+  position: relative; border-color: var(--gold);
+  border-top-left-radius: 0; border-top-right-radius: 0;
+}
 .plan--rec .plan__from,
 .plan--rec .plan__desc { color: var(--on-dark-dim); }
 .plan__flag {
-  margin: 0 -28px; padding: 11px 28px;
-  border-radius: calc(var(--r-card) - 1px) calc(var(--r-card) - 1px) 0 0;
+  position: absolute; left: -1px; right: -1px; bottom: 100%;
+  height: var(--flag-h); padding: 0 28px;
+  display: flex; align-items: center;
+  border-radius: var(--r-card) var(--r-card) 0 0;
   background: linear-gradient(180deg, var(--gold-top), var(--gold));
   font-family: var(--mono); font-size: 11.5px; font-weight: 500;
   letter-spacing: 0.12em; text-transform: uppercase; color: var(--charcoal);
