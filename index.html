@@ -75,6 +75,7 @@
         { "@type": "Question", "name": "What do I finish with?", "acceptedAnswer": { "@type": "Answer", "text": "The Prentice1 Readiness Standard: a record of what you were taught and what faculty observed you do, written to be read by a practice. It is a trust signal, not a certification and not a license." } },
         { "@type": "Question", "name": "What does tuition include?", "acceptedAnswer": { "@type": "Answer", "text": "Foundations ($4,995) is the six-week digital curriculum with 3D anatomy, live instruction every week, knowledge assessments including the Foundations Exam, and career preparation. Academy ($14,995) adds the cadaver lab, the five-day intensive in California with supervised injection on industry-grade product, the oral review and clearance, the Readiness Standard, small-group career coaching, Prentice Day, matching and 90 days of support in your first role. Travel, lodging and state license fees are not included in either." } },
         { "@type": "Question", "name": "Will my Foundations tuition count toward Academy if I upgrade?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, if you upgrade within the same cohort. Your full $4,995 Foundations tuition is credited toward your Academy upgrade; the credit does not carry over to a later cohort. The upgrade fee is $10,995, bringing your total investment to $15,990. Candidates who enroll directly in Academy pay $14,995, saving $995 compared with the two-step pathway. Upgrades are subject to admissions approval, clinical eligibility, program requirements and seat availability." } },
+        { "@type": "Question", "name": "What if I can't make Cohort 1's dates?", "acceptedAnswer": { "@type": "Answer", "text": "Apply anyway and choose a future cohort on the application. You go through the same admission steps, and we contact you as soon as the next cohort's dates are set. Nothing is charged until you accept an offer for a specific cohort." } },
         { "@type": "Question", "name": "Can I pay over time?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, through Cherry. Checking your rate is a soft credit check and won't affect your credit score. Financing is subject to approval." } }
       ]
     }
@@ -140,7 +141,7 @@
           <a class="btn btn--gold" href="/apply/">Apply for Cohort 1</a>
           <a class="btn btn--outline" href="#tuition">See tuition and schedule</a>
         </div>
-        <p class="hero__micro">Apply in minutes. No payment until you're accepted.</p>
+        <p class="hero__micro">Apply in minutes. No payment until you're accepted.<br>Can't make January? <a href="/apply/?cohort=future">Apply for a future cohort</a>.</p>
       </div>
     </div>
 
@@ -525,6 +526,17 @@
         </div>
       </div>
 
+      <!-- Future cohorts (owner, 2026-10-29): applicants are not forced into
+           Cohort 1. No dates or prices are published for later cohorts, so this
+           promises only a conversation when they are set. -->
+      <div class="later rv">
+        <div class="later__copy">
+          <div class="eyebrow">NOT READY FOR JANUARY?</div>
+          <p><b>Apply now for a future cohort.</b> Same pathways, same admission steps. We'll review your application and contact you as soon as the next cohort's dates are set.</p>
+        </div>
+        <a class="btn btn--outline-ink" href="/apply/?cohort=future">Apply for a future cohort</a>
+      </div>
+
       <div class="upgrade rv">
         <div class="upgrade__copy">
           <div class="eyebrow">THE TWO-STEP PATH</div>
@@ -629,6 +641,14 @@
           </div>
         </div>
         <div class="faq__item">
+          <button class="faq__q" data-faq-q type="button" aria-expanded="false" aria-controls="faq-a10" id="faq-q10">
+            <span>What if I can't make Cohort 1's dates?</span><span class="faq__sign" aria-hidden="true"></span>
+          </button>
+          <div class="faq__a" id="faq-a10" role="region" aria-labelledby="faq-q10" hidden>
+            <p>Apply anyway and choose a future cohort on the application. You go through the same admission steps, and we contact you as soon as the next cohort's dates are set. Nothing is charged until you accept an offer for a specific cohort. <a href="/apply/?cohort=future">Apply for a future cohort</a>.</p>
+          </div>
+        </div>
+        <div class="faq__item">
           <button class="faq__q" data-faq-q type="button" aria-expanded="false" aria-controls="faq-a6" id="faq-q6">
             <span>What if I need to withdraw or defer?</span><span class="faq__sign" aria-hidden="true"></span>
           </button>
@@ -654,6 +674,7 @@
       <div class="final__col">
         <h2>Applications for Cohort 1 are open.</h2>
         <p>20 seats. Applications close December 23, 2026. No payment until you're accepted.</p>
+        <p class="final__later">Can't make these dates? <a href="/apply/?cohort=future">Apply for a future cohort</a>.</p>
       </div>
       <div class="final__actions">
         <a class="btn btn--gold" href="/apply/">Apply for Cohort 1</a>

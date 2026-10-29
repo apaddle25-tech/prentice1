@@ -388,6 +388,7 @@ p { margin: 0; }
 .hero__lede { font-size: 17px; line-height: 1.65; color: var(--on-dark-dim); max-width: 54ch; text-wrap: pretty; }
 .hero__actions { display: flex; gap: var(--s-4); flex-wrap: wrap; align-items: center; margin-top: 6px; }
 .hero__micro { font-size: 13.5px; color: var(--on-dark-dim); }
+.hero__micro a { color: var(--gold-light); text-decoration: underline; }
 
 /* --- The hero on a phone -------------------------------------------------
    The desktop rule insets the video from the left and takes its crop from 30%
@@ -878,6 +879,18 @@ p { margin: 0; }
   letter-spacing: 0.12em; text-transform: uppercase; color: var(--charcoal);
 }
 
+/* "Not ready for January?" — a quiet strip between the pathway cards and the
+   two-step panel, so a later start is offered without competing with Cohort 1. */
+.later {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: var(--s-6) var(--s-9);
+  padding: var(--s-8) clamp(24px, 3vw, 40px);
+  border: 1px solid var(--rule); border-radius: var(--r-card); background: var(--cream);
+}
+.later__copy { display: flex; flex-direction: column; gap: var(--s-2); max-width: 640px; }
+.later__copy p { margin: 0; font-size: 15.5px; line-height: 1.6; color: var(--ink-2); }
+.later__copy b { font-weight: 500; color: var(--ink); }
+
 .upgrade {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
   gap: clamp(24px, 4vw, 56px); align-items: center;
@@ -1268,3 +1281,19 @@ p { margin: 0; }
 .prose__meta { font-size: 14px; color: var(--ink-2); }
 .prose__list { margin: var(--s-5) 0 0; padding-left: var(--s-7); display: flex; flex-direction: column; gap: var(--s-3); font-size: 16px; line-height: 1.7; color: var(--ink-2); }
 .prose .plain__actions { margin-top: var(--s-11); }
+
+/* Cohort choice on /apply: two large radio rows, Cohort 1 first. */
+.choice { border: 0; margin: 0; padding: 0; min-width: 0; }
+.choice legend { padding: 0; margin-bottom: 6px; font-size: 14px; font-weight: 500; color: var(--ink); }
+.choice__opt {
+  display: flex; gap: var(--s-4); align-items: flex-start;
+  padding: var(--s-5) var(--s-6); margin-top: var(--s-2);
+  border: 1px solid var(--rule); border-radius: var(--r-control); background: var(--cream); cursor: pointer;
+}
+.choice__opt:has(input:checked) { border-color: var(--gold); background: var(--gold-wash); }
+/* Undo the text-input styling .field input gives every input. */
+.choice .choice__opt input { flex: none; width: 18px; height: 18px; margin: 2px 0 0; padding: 0; border: 0; background: none; box-shadow: none; accent-color: var(--gold-deep); }
+.choice__opt b { display: block; font-weight: 500; color: var(--ink); font-size: 15px; }
+.choice__sub { display: block; font-size: 13.5px; color: var(--ink-2); margin-top: 2px; }
+.final__col .final__later { font-size: 14.5px; }
+.final__later a { color: var(--gold-light); text-decoration: underline; }
