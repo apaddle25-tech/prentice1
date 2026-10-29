@@ -634,8 +634,11 @@ p { margin: 0; }
 
 .frame { position: relative; width: 100%; overflow: hidden; background: var(--charcoal); box-shadow: var(--shadow-media); }
 .frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.frame--16x9 { aspect-ratio: 16 / 9; border-radius: var(--r-card); background: var(--stage); }
-.frame--16x9 video { object-position: 40% 30%; }
+/* Dr. Rivkin's assessment clip, full width in the intensive. 21:9 matches the
+   group photo it replaced there; 38% keeps both gloved hands and her face in. */
+.frame--wide { aspect-ratio: 21 / 9; border-radius: var(--r-card); background: var(--stage); }
+.frame--wide video { object-position: 50% 38%; }
+@media (max-width: 640px) { .frame--wide { aspect-ratio: 4 / 3; } }
 
 /* ============================================================================
    Live week
@@ -744,7 +747,6 @@ p { margin: 0; }
 .rivkin__lead { font-size: 17px; color: var(--ink); }
 .creds { list-style: none; margin: var(--s-2) 0 0; padding: 0; border-top: 1px solid var(--rule); }
 .creds li { padding: 11px 0; border-bottom: 1px solid var(--rule); font-size: 15.5px; }
-.rivkin__video { margin-top: var(--s-5); }
 
 .carousel { display: flex; flex-direction: column; gap: var(--s-6); margin-top: clamp(8px, 2vw, 24px); }
 .carousel__head { display: flex; justify-content: space-between; align-items: center; gap: var(--s-6); flex-wrap: wrap; }
