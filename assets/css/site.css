@@ -584,14 +584,9 @@ p { margin: 0; }
 .features__frame--light img { object-fit: contain; object-position: 50% 50%; }
 
 /* --- Enhanced: the menu on the left, one stage on the right ------------ */
-/* The stage takes most of the row: the captures are screens with small type,
-   so the menu gets the narrowest column it reads well in. */
-.features--on { display: grid; grid-template-columns: minmax(240px, 3.4fr) minmax(0, 9fr); gap: clamp(28px, 3.5vw, 48px); align-items: start; }
-/* On wide screens the stage also reaches into the right-hand margin, up to
-   120px past the measure, always stopping 40px short of the viewport edge. */
-@media (min-width: 1280px) {
-  .features--on { margin-right: calc(-1 * min(120px, (100vw - var(--measure)) / 2 - 40px)); }
-}
+/* The stage takes the larger share of the row, the captures being screens
+   with small type, while staying inside the page measure. */
+.features--on { display: grid; grid-template-columns: minmax(260px, 4.4fr) minmax(0, 8fr); gap: clamp(28px, 4vw, 56px); align-items: start; }
 .features--on .features__item { padding: 0; gap: 0; }
 .features--on .features__fig { margin: 0; }
 .features__tab {
