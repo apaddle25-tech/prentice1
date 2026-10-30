@@ -264,8 +264,6 @@ p { margin: 0; }
 .h2--big { font-size: clamp(44px, 5.6vw, 76px); line-height: 1; letter-spacing: -0.015em; }
 .lede { font-size: 17px; line-height: 1.65; color: var(--ink-2); }
 
-.credit { font-size: 12px; color: var(--ink-2); margin-top: var(--s-5); }
-
 /* ============================================================================
    Header
    ========================================================================= */
