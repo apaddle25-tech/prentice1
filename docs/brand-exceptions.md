@@ -23,7 +23,8 @@ the most prominent moving images on the site.
 
 **Compliant today and unaffected:** the online classroom captures
 (`classroom/*` and `classroom-anatomy`, real platform screens and a real
-recording), `rivkin`, `faculty/group.jpg` and the four faculty portraits.
+recording). The faculty photos and trainer clip that were listed here were
+removed from the site on 2026-10-30.
 
 **Decision:** Aneesh Patel, 2026-10-17 — ship under a documented exception
 and replace after the LA shoot. Usage rights to the stock clips are cleared;

@@ -569,8 +569,7 @@ p { margin: 0; }
 .features__n { font-family: var(--mono); font-size: 11.5px; font-weight: 400; letter-spacing: 0.1em; color: var(--gold-deep); flex: none; width: 2.2em; }
 .features__b { font-size: 15px; line-height: 1.55; color: var(--ink-2); padding-left: calc(2.2em * 11.5 / 15 + var(--s-4)); max-width: 52ch; }
 .features__fig { margin: var(--s-3) 0 0; display: flex; flex-direction: column; gap: var(--s-3); min-width: 0; }
-.features__fig figcaption,
-.group-fig figcaption { font-size: 13px; color: var(--ink-2); }
+.features__fig figcaption { font-size: 13px; color: var(--ink-2); }
 
 /* Every capture sits in the same 16:10 box, so the stage never changes height
    between features. No border or shadow: each capture runs to the edge of
@@ -629,13 +628,6 @@ p { margin: 0; }
   .features--on .features__stage { order: -1; }
 }
 
-.frame { position: relative; width: 100%; overflow: hidden; background: var(--charcoal); box-shadow: var(--shadow-media); }
-.frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-/* Dr. Rivkin's assessment clip, full width in the intensive. 21:9 matches the
-   group photo it replaced there; 38% keeps both gloved hands and her face in. */
-.frame--wide { aspect-ratio: 21 / 9; border-radius: var(--r-card); background: var(--stage); }
-.frame--wide video { object-position: 50% 38%; }
-@media (max-width: 640px) { .frame--wide { aspect-ratio: 4 / 3; } }
 
 /* ============================================================================
    Live week
@@ -722,71 +714,6 @@ p { margin: 0; }
 /* ============================================================================
    Who trains you
    ========================================================================= */
-
-/* The faculty group photo sits under Dr. Rivkin, before the faculty carousel. */
-.group-fig { margin: 0; display: flex; flex-direction: column; gap: var(--s-3); }
-.group-fig img {
-  width: 100%; height: auto; aspect-ratio: 21 / 9; object-fit: cover; object-position: center 22%;
-  border-radius: var(--r-card); box-shadow: var(--shadow-media);
-}
-
-.rivkin {
-  display: flex; flex-wrap: wrap; gap: clamp(28px, 4vw, 56px); align-items: stretch;
-  border-top: 2px solid var(--charcoal); padding-top: var(--s-9);
-}
-.rivkin__photo {
-  flex: 1 1 320px; min-width: 0; max-width: 460px; min-height: 420px;
-  position: relative; border-radius: var(--r-card); overflow: hidden; background: var(--rule);
-}
-.rivkin__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 18%; }
-.rivkin__body { flex: 1.2 1 400px; min-width: 0; display: flex; flex-direction: column; gap: var(--s-5); }
-.rivkin__name { font-size: clamp(32px, 3.8vw, 52px); line-height: 1; white-space: nowrap; }
-.rivkin__lead { font-size: 17px; color: var(--ink); }
-.creds { list-style: none; margin: var(--s-2) 0 0; padding: 0; border-top: 1px solid var(--rule); }
-.creds li { padding: 11px 0; border-bottom: 1px solid var(--rule); font-size: 15.5px; }
-
-.carousel { display: flex; flex-direction: column; gap: var(--s-6); margin-top: clamp(8px, 2vw, 24px); }
-.carousel__head { display: flex; justify-content: space-between; align-items: center; gap: var(--s-6); flex-wrap: wrap; }
-.carousel__ctrls { display: flex; align-items: center; gap: var(--s-5); }
-.carousel__dots { display: flex; gap: 6px; }
-.dot {
-  width: 6px; height: 6px; border: 0; padding: 0; border-radius: 3px;
-  background: var(--rule); cursor: pointer;
-  transition: width var(--t-fast) var(--ease), background-color var(--t-fast) var(--ease);
-}
-.dot.is-on { width: 22px; background: var(--gold-deep); }
-.carousel__btn {
-  width: 38px; height: 38px; border-radius: 50%;
-  border: 1px solid var(--gold); background: transparent; color: var(--gold-deep);
-  cursor: pointer; font-size: 15px; display: flex; align-items: center; justify-content: center;
-  transition: background-color var(--t-fast) var(--ease);
-}
-.carousel__btn:hover { background: var(--gold-wash); }
-/* No `scroll-behavior: smooth` here, deliberately. Combined with
-   `scroll-snap-type: x mandatory` it deadlocks: snap re-targets the in-flight
-   smooth scroll on every frame and scrollLeft never leaves 0, so the arrows
-   and the auto-advance silently do nothing. site.js passes `behavior` to
-   scrollTo instead, which snaps correctly and still animates. Native touch
-   and trackpad scrolling are unaffected. */
-.carousel__track {
-  display: flex; gap: var(--s-6); overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  border-top: 1px solid var(--charcoal); padding-top: var(--s-7);
-}
-.carousel__track::-webkit-scrollbar { display: none; }
-.fac-card {
-  flex: 0 0 min(100%, 440px); scroll-snap-align: start;
-  display: grid; grid-template-columns: 140px minmax(0, 1fr);
-  background: var(--cream); border: 1px solid var(--rule);
-  border-radius: var(--r-card); overflow: hidden; box-shadow: var(--shadow-card);
-}
-.fac-card img { width: 140px; height: 180px; object-fit: cover; object-position: center 18%; }
-.fac-card__body { padding: var(--s-7) 22px; display: flex; flex-direction: column; gap: 6px; }
-.fac-card__head { display: flex; align-items: baseline; gap: var(--s-3); flex-wrap: wrap; }
-.fac-card__name { font-family: var(--display); font-weight: 400; font-size: 26px; line-height: 1; color: var(--charcoal); }
-.fac-card__cred { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; color: var(--gold-deep); }
-.fac-card p { margin: var(--s-1) 0 0; font-size: 14.5px; line-height: 1.55; color: var(--ink-2); }
 
 .also { display: flex; flex-direction: column; gap: var(--s-6); margin-top: clamp(8px, 2vw, 24px); }
 .also__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: var(--s-7) clamp(28px, 4vw, 56px); }
