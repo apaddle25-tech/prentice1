@@ -33,7 +33,7 @@ are built from is sourced, and each line says where:
   the footer, continuous narration in `<aside>`, `[PAUSE]` where the player
   stops, figures pointing at the approved protocol rather than printed.
 
-Every clinical line here needs Dr Rivkin's review before delivery, on the same
+Every clinical line here needs the clinical lead's review before delivery, on the same
 footing as the 112 rows already in the review register.
 
 ## Why these four, in this order

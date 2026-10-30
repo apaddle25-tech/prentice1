@@ -190,119 +190,6 @@
   }
 
   /* --------------------------------------------------------------------
-     Faculty carousel
-     -------------------------------------------------------------------- */
-  function initCarousel() {
-    var root = document.querySelector("[data-carousel]");
-    if (!root) return;
-
-    var track = root.querySelector("[data-carousel-track]");
-    var cards = track ? track.children : [];
-    var dots  = root.querySelectorAll("[data-carousel-dot]");
-    var prev  = root.querySelector("[data-carousel-prev]");
-    var next  = root.querySelector("[data-carousel-next]");
-    if (!track || !cards.length) return;
-
-    var GAP = 16;
-    function step() { return cards[0].getBoundingClientRect().width + GAP; }
-    function index() { return Math.round(track.scrollLeft / step()); }
-
-    /* The track is scrolled by a rAF tween rather than
-       scrollTo({behavior:'smooth'}), for two reasons.
-
-       Correctness: native smooth scrolling on this container was measured not
-       to move it at all — scrollLeft stayed at 0 with snap set to mandatory,
-       proximity and none alike, while behavior:'auto' worked every time.
-       Assigning scrollLeft per frame avoids that path entirely.
-
-       Brand: §07 puts every motion on cubic-bezier(0.22,0.7,0.2,1) under
-       600ms. Native smooth scroll has its own duration and curve and cannot
-       be told otherwise, so it could not have satisfied the rule regardless. */
-    function bezier(x) {
-      // cubic-bezier(0.22, 0.7, 0.2, 1) solved for y at progress x.
-      var x1 = 0.22, y1 = 0.7, x2 = 0.2, y2 = 1;
-      function cx(t) { return 3 * (1 - t) * (1 - t) * t * x1 + 3 * (1 - t) * t * t * x2 + t * t * t; }
-      function cy(t) { return 3 * (1 - t) * (1 - t) * t * y1 + 3 * (1 - t) * t * t * y2 + t * t * t; }
-      var lo = 0, hi = 1, t = x;
-      for (var i = 0; i < 20; i++) {         // bisection: plenty for 420ms
-        if (cx(t) < x) lo = t; else hi = t;
-        t = (lo + hi) / 2;
-      }
-      return cy(t);
-    }
-
-    var tween = null;
-    function scrollTrackTo(left) {
-      if (tween) cancelAnimationFrame(tween);
-      var from = track.scrollLeft;
-      var delta = left - from;
-      if (reduced.matches || !delta) { track.scrollLeft = left; return; }
-
-      var t0 = performance.now(), dur = 420;
-      (function frame(now) {
-        var p = Math.min(1, (now - t0) / dur);
-        track.scrollLeft = from + delta * bezier(p);
-        if (p < 1) tween = requestAnimationFrame(frame); else tween = null;
-      })(t0);
-    }
-
-    /* `wrap` is set by the → button and the auto-advance, not by the dots.
-
-       The last card cannot usually be scrolled to its own offset: several
-       cards fit at once, so scrollLeft maxes out at scrollWidth - clientWidth
-       and the final index is unreachable. Without the atEnd test, advancing
-       from the last reachable position asks for an offset the browser clamps,
-       the track does not move, and the carousel silently stops cycling. */
-    function goTo(i, wrap) {
-      var last = cards.length - 1;
-      var atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
-      var target = (wrap && (i > last || atEnd)) ? 0 : Math.max(0, Math.min(last, i));
-      // scrollIntoView would also scroll the page vertically to reach the
-      // track; this moves only this container.
-      scrollTrackTo(target * step());
-    }
-
-    function paint() {
-      var i = index();
-      dots.forEach(function (d, n) {
-        var on = n === i;
-        d.classList.toggle("is-on", on);
-        d.setAttribute("aria-current", on ? "true" : "false");
-      });
-    }
-
-    track.addEventListener("scroll", function () {
-      clearTimeout(track._t);
-      track._t = setTimeout(paint, 80);
-    }, { passive: true });
-
-    if (prev) prev.addEventListener("click", function () { goTo(index() - 1); });
-    if (next) next.addEventListener("click", function () { goTo(index() + 1, true); });
-    dots.forEach(function (d, n) {
-      d.addEventListener("click", function () { goTo(n); });
-    });
-
-    paint();
-
-    /* Auto-advance, 4s. Stops while the track is hovered or holds focus,
-       while the tab is hidden, and entirely under reduced motion. */
-    if (reduced.matches) return;
-
-    var timer = null;
-    function start() { if (!timer) timer = setInterval(function () { goTo(index() + 1, true); }, 4000); }
-    function stop()  { clearInterval(timer); timer = null; }
-
-    root.addEventListener("mouseenter", stop);
-    root.addEventListener("mouseleave", start);
-    root.addEventListener("focusin", stop);
-    root.addEventListener("focusout", start);
-    document.addEventListener("visibilitychange", function () {
-      document.hidden ? stop() : start();
-    });
-    start();
-  }
-
-  /* --------------------------------------------------------------------
      Online classroom feature tour
 
      The markup is a plain list, each item carrying its own figure, so the
@@ -648,7 +535,6 @@
     initMenu();
     initAuthNav();
     initVideo();
-    initCarousel();
     initFeatures();
     initFaq();
     initReveal();
