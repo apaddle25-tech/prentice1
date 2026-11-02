@@ -557,73 +557,21 @@ p { margin: 0; }
    Online classroom
    ========================================================================= */
 
-/* The feature tour. Read as a plain list by default: each item's title,
-   sentence and picture in order. site.js adds .features--on, moves every
-   figure into one stage beside the list, and steps through them (§13: the
-   enhanced layout only exists once the script has run). */
-.features__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; border-top: 1px solid var(--charcoal); }
-.features__item { padding: 18px 0 22px; border-bottom: 1px solid var(--rule); display: flex; flex-direction: column; gap: var(--s-2); }
-.features__t { display: flex; align-items: baseline; gap: var(--s-4); font-family: var(--sans); font-size: 17px; font-weight: 500; line-height: 1.35; color: var(--ink); }
-.features__n { font-family: var(--mono); font-size: 11.5px; font-weight: 400; letter-spacing: 0.1em; color: var(--gold-deep); flex: none; width: 2.2em; }
-.features__b { font-size: 15px; line-height: 1.55; color: var(--ink-2); padding-left: calc(2.2em * 11.5 / 15 + var(--s-4)); max-width: 52ch; }
-.features__fig { margin: var(--s-3) 0 0; display: flex; flex-direction: column; gap: var(--s-3); min-width: 0; }
-.features__fig figcaption { font-size: 13px; color: var(--ink-2); }
+/* Six plain items, three across, ruled like the rest of the page (§09). No
+   captures and no script: the section stays general until the platform is
+   finalised (owner, 1 Nov 2026). */
+.classroom { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: clamp(24px, 4vw, 56px); border-top: 1px solid var(--rule); }
+.classroom__item { padding: var(--s-9) 0; border-bottom: 1px solid var(--rule); display: flex; flex-direction: column; gap: var(--s-4); }
+.classroom__icon { color: var(--gold-deep); flex: none; }
+.classroom__t { font-family: var(--display); font-size: 22px; font-weight: 500; line-height: 1.25; color: var(--ink); }
+.classroom__b { font-size: 15px; line-height: 1.6; color: var(--ink-2); max-width: 36ch; }
 
-/* Every capture sits in the same 16:10 box, so the stage never changes height
-   between features. No border or shadow: each capture runs to the edge of
-   the box. Screens fill it from the top-left, where the platform's own chrome
-   is; the light captures sit straight on the section's cream. */
-.features__frame { position: relative; aspect-ratio: 16 / 10; overflow: hidden; border-radius: var(--r-frame); background: var(--charcoal); }
-.features__frame img,
-.features__frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 0 0; }
-.features__frame--model { background: #121212; }
-.features__frame--model video { object-position: 50% 40%; }
-.features__frame--light { background: transparent; border-radius: 0; }
-.features__frame--light img { object-fit: contain; object-position: 50% 50%; }
-
-/* --- Enhanced: the menu on the left, one stage on the right ------------ */
-/* The stage takes the larger share of the row, the captures being screens
-   with small type, while staying inside the page measure. */
-.features--on { display: grid; grid-template-columns: minmax(260px, 4.4fr) minmax(0, 8fr); gap: clamp(28px, 4vw, 56px); align-items: start; }
-.features--on .features__item { padding: 0; gap: 0; }
-.features--on .features__fig { margin: 0; }
-.features__tab {
-  all: unset; box-sizing: border-box; width: 100%; cursor: pointer;
-  display: flex; align-items: baseline; gap: var(--s-4); padding: 16px 0;
-  font-family: var(--sans); font-size: 17px; font-weight: 500; line-height: 1.35; color: var(--ink-2);
-  transition: color var(--t-fast) var(--ease);
-}
-.features__tab:hover,
-.features__tab[aria-selected="true"] { color: var(--ink); }
-.features__tab:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: var(--r-control); }
-/* The selected feature carries the scrub bar's stop marker: a gold diamond. */
-.features__tab .features__n { position: relative; }
-.features__tab[aria-selected="true"] .features__n::before {
-  content: ""; position: absolute; left: -16px; top: 50%; width: 7px; height: 7px;
-  background: var(--gold); transform: translateY(-50%) rotate(45deg);
-}
-.features--on .features__b { margin-top: -8px; padding-bottom: 18px; }
-.features--on .features__b[hidden] { display: none; }
-.features__stage { display: grid; min-width: 0; }
-.features__stage .features__fig { grid-area: 1 / 1; transition: opacity var(--t-base) var(--ease), visibility 0s linear var(--t-base); }
-.features__stage .features__fig[aria-hidden="true"] { opacity: 0; visibility: hidden; }
-.features__stage .features__fig[aria-hidden="false"] { opacity: 1; visibility: visible; transition-delay: 0s; }
-.features__ctrl { display: flex; justify-content: flex-start; padding-top: var(--s-6); }
-.features__pause {
-  display: inline-flex; align-items: center; gap: var(--s-2); cursor: pointer;
-  background: transparent; border: 1px solid var(--rule); border-radius: var(--r-pill);
-  padding: 7px var(--s-4); color: var(--ink-2);
-  font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em;
-  transition: border-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
-}
-.features__pause:hover { border-color: var(--gold); color: var(--ink); }
-.features__pause:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
-.features ~ .credit { margin-top: calc(var(--s-5) - var(--s-9)); }
-
-/* Below 900px the stage leads and the menu follows it. */
 @media (max-width: 899px) {
-  .features--on { grid-template-columns: minmax(0, 1fr); gap: var(--s-8); }
-  .features--on .features__stage { order: -1; }
+  .classroom { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 559px) {
+  .classroom { grid-template-columns: minmax(0, 1fr); }
+  .classroom__item { padding: var(--s-8) 0; }
 }
 
 
